@@ -44,13 +44,14 @@ XTick行情API提供了全面、准确、稳定的行情数据，帮助开发者
 取消订阅：http://api.xtick.top/doc/unsubscribe?token=043fbdcba7f3f3ab332ffff123456789 <br>
 入参：token 登录XTick网站，注册获取
 
-2.2 历史数据接口
-1. 请求方法：<br>
-   请求地址：http://api.xtick.top/doc/history?type=1&code=000001&period=tick&fq=none&startDate=2025-03-25&endDate=2025-03-25&token=043fbdcba7f3f3ab332ffff123456789 <br>
-   入参1：type 股票类别<br>
-   沪深京A股type=1，港股type=3;<br>
-   入参2：code 股票代码<br>
-   比如平安银行为000001<br>
+2.2 行情数据接口
+1. 请求方法：
+   请求地址：http://api.xtick.top/doc/market?type=1&code=000001&period=tick&fq=none&startDate=2025-03-25&endDate=2025-03-25&token=043fbdcba7f3f3ab332ffff123456789
+   备注：行情数据支持交易日内盘内实时更新。
+   入参1：type 股票类别
+   沪深京A股type=1，港股type=3，沪深ETF type=20;
+   入参2：code 股票代码
+   比如平安银行为000001
    入参3：period 用于表示要获取的周期，枚举取值如下：
 - tick - 分笔数据
 - 1m - 1分钟线
@@ -63,19 +64,40 @@ XTick行情API提供了全面、准确、稳定的行情数据，帮助开发者
 - 1mon - 月线
 - 1q - 季度线
 - 1hy - 半年线
-- 1y - 年线<br>
+- 1y - 年线
   参数4：fq 除权方式，用于K线数据复权计算，对tick等其他周期数据无效，枚举取值如下：
-- none 不复
+- none 不复权
 - front 前复权
 - back 后复权
 - front_ratio 等比前复权
-- back_ratio 等比后复权<br>
+- back_ratio 等比后复权
   参数5：时间范围，用于指定数据请求范围，表示的范围是[startDate , endDate]区间（包含前后边界）。
   特别说明：period为tick类型，则单次请求时间跨度最大为一天，即startDate和endDate日期需设置为同一天。
   period为分钟类型（包括1m、5m、15m、30m、1h），则单次请求时间跨度最大为一月，即endDate - startDate不超过30天。
 - startDate - 起始时间，日期格式：2025-03-25
-- endDate- 结束时间，日期格式：2025-03-25<br>
+- endDate- 结束时间，日期格式：2025-03-25
   入参6：token 登录XTick网站，注册获取
+
+2.3 财务数据接口
+1. 请求方法：
+   请求地址：http://api.xtick.top/doc/financial?type=1&code=000001&report=Pershareindex&startDate=2020-03-25&endDate=2025-03-25&token=043fbdcba7f3f3ab332ffff123456789
+   入参1：type 股票类别
+   沪深京A股type=1，港股type=3;
+   入参2：code 股票代码
+   比如平安银行为000001
+   入参3：report 用于表示要获取的财务报表，枚举取值如下：
+- Balance - 资产负债表
+- Income - 利润表
+- CashFlow - 现金流量表
+- Capital - 股本表
+- Holdernum - 股东数
+- Top10holder - 十大股东
+- Top10flowholder - 十大流通股东
+- Pershareindex - 每股指标
+  参数4：时间范围，用于指定数据请求范围，表示的范围是[startDate , endDate]区间（包含前后边界）。
+- startDate - 起始时间，日期格式：2025-03-25
+- endDate- 结束时间，日期格式：2025-03-25
+  入参5：token 登录XTick网站，注册获取
 
 ## 项目地址
 
