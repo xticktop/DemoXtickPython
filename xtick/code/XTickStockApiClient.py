@@ -81,7 +81,7 @@ class XTickWebSocketClient(object):
 
 if __name__ == "__main__":
     xTickClient = XTickWebSocketClient()
-    token: str = "bd6f2283cfdc4b9e545d49bd4b092e8a"  # 登录XTick官网，获取token
+    token: str = ""  # 登录XTick官网，获取token
     result = xTickClient.getMarketData(1, "000001", "1m", "none", "2025-04-25", "2025-05-25", token, "get")
     print(result)
     # xTickClient.demoForFinancialData()
