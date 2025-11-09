@@ -37,16 +37,16 @@ https://github.com/xticktop/xtick <br>
 1. 订阅方法： <br>
    订阅数据：订阅为Websocket API，请在Github上下载开源项目，参考XTickWebSocketClient.java中已实现的订阅功能。 <br>
    入参1：authCodes 枚举取值如下： <br>
-
 - tick.SZ - 订阅深交所A股的tick数据。
 - tick.SH - 订阅上交所A股的tick数据。
 - tick.BJ - 订阅北交所A股的tick数据。
 - tick.HK - 订阅港交所港股的tick数据。
 - 000001.SZ - 订阅深交所平安银行000001的tick数据。支持按股票个数订阅，包括沪深京港四个交易所的股票，最多订阅50个。
-- time.SZ - 订阅深交所A股的k线数据，包括time、1m。
-- time.SH - 订阅上交所A股的k线数据，包括time、1m。
-- time.BJ - 订阅北交所A股的k线数据，包括time、1m。
-- time.HK - 订阅港交所港股的k线数据，包括time、1m。 <br>
+- time.SZ - 订阅深交所A股的k线数据，包括1m。
+- time.SH - 订阅上交所A股的k线数据，包括1m。
+- time.BJ - 订阅北交所A股的k线数据，包括1m。
+- time.HK - 订阅港交所港股的k线数据，包括1m。 <br>
+
   入参2：token 登录XTick网站，注册获取 <br>
 
 取消订阅：http://api.xtick.top/doc/unsubscribe?token=043fbdcba7f3f3ab332ffff123456789 <br>
@@ -113,8 +113,8 @@ https://github.com/xticktop/xtick <br>
 - Holdernum - 股东数，数据范围：2001年-至今
 - Top10holder - 十大股东，数据范围：公司上市-至今
 - Top10flowholder - 十大流通股东，数据范围：2004年-至今
-- Pershareindex - 每股指标，数据范围：2007年-至今
-  参数4：时间范围，用于指定数据请求范围，表示的范围是[startDate , endDate]区间（包含前后边界）。
+- Pershareindex - 每股指标，数据范围：2007年-至今<br>
+  参数4：时间范围，用于指定数据请求范围，表示的范围是[startDate , endDate]区间（包含前后边界）。<br>
 - startDate - 起始时间，日期格式：2025-03-25
 - endDate- 结束时间，日期格式：2025-04-25 <br>
   入参5：token 登录XTick网站，注册获取 <br>
@@ -135,10 +135,10 @@ https://github.com/xticktop/xtick <br>
 - endDate：结束时间。
 - token：令牌
   3、扩展参数<br>
-  参数名：scale
-  默认值为3，取值范围[1-10]，取值含义：数值代表返回值的精度（保留几位小数位）。
-  参数名：round
-  默认值为1，取值范围[0-7]，取值含义：
+  参数名：scale<br>
+  默认值为3，取值范围[1-10]，取值含义：数值代表返回值的精度（保留几位小数位）。<br>
+  参数名：round<br>
+  默认值为1，取值范围[0-7]，取值含义：<br>
 -   0 ROUND_UP模式，四舍五入
 -   1 ROUND_DOWN模式，截断
 -   2 ROUND_CEILING模式
@@ -222,8 +222,7 @@ https://github.com/xticktop/xtick <br>
    a、code取值为000001，表示获取股票000001的竞价数据。 <br>
    b、code取值为000001,000002,600000，表示获取这三个票的竞价数据，多个票直接用英文逗号分割，最多50个股票。 <br>
    a、code取值为all，表示获取全市场股票的竞价数据。 <br>
-   
-入参3：period 用于表示要获取的周期，枚举取值如下： <br>
+  入参3：period 用于表示要获取的周期，枚举取值如下： <br>
 - tick - tick数据 <br>
 - 1d - 日线数据 <br>
   入参4：token 登录XTick网站，注册获取 <br>
@@ -240,14 +239,17 @@ https://github.com/xticktop/xtick <br>
    Tick历史数据范围：2025年2月-至今，只能通过接口调用最近半年数据。 <br>
    入参4：token 登录XTick网站，注册获取 <br>
 
-2.6 其它接口
+2.6 其它接口<br>
+
 2.6.1 股票列表 <br>
+
 获取所有股票代码，包括沪深京A股、港股、沪深指数、ETF几类数据。 <br>
 
 1. 请求方法： <br>
    请求地址：http://api.xtick.top/doc/codes?token=043fbdcba7f3f3ab332ffff123456789 <br>
    备注：返回数据实例 1-000001 代表 type-code <br>
    沪深京A股type=1，港股type=3，沪深指数type=10，沪深ETF type=20; <br>
+
    入参1：token 登录XTick网站，注册获取。 <br>
 
 ## 项目地址
