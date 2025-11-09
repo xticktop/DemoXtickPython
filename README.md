@@ -34,25 +34,39 @@ https://github.com/xticktop/xtick <br>
 订阅数据按照证券交易所订阅推送，包括上交所、深交所、北交所、港交所（只支持部分股票）。 <br>
 数据为实时推送，发数据非常快，客户端接受到数据后，最好做异步处理，将接受数据和数据处理分开，避免接受数据阻塞。切记...切记...切记：数据接受和数据处理，务必放在两个线程中，不要阻塞数据接受。
 
-1. 订阅方法： <br>
-   订阅数据：订阅为Websocket API，请在Github上下载开源项目，参考XTickWebSocketClient.java中已实现的订阅功能。 <br>
-   入参1：authCodes 枚举取值如下： <br>
-- tick.SZ - 订阅深交所A股的tick数据。
-- tick.SH - 订阅上交所A股的tick数据。
-- tick.BJ - 订阅北交所A股的tick数据。
-- tick.HK - 订阅港交所港股的tick数据。
+2.1.1 订阅接口 <br>
+订阅数据：订阅为Websocket API，请在Github上下载开源项目，参考XTickWebSocketClient.java中已实现的订阅功能。 <br>
+入参1：authCodes 枚举取值如下： <br>
+场景a、按交易所订阅： <br>
+- tick.SZ.1 - 订阅深交所A股的tick数据。
+- tick.SZ.10 - 订阅深交所指数的tick数据。
+- tick.SZ.20 - 订阅深交所ETF的tick数据。
+- tick.SH.1 - 订阅上交所A股的tick数据。
+- tick.SH.10 - 订阅上交所指数的tick数据。
+- tick.SH.20 - 订阅上交所ETF的tick数据。
+- tick.BJ.1 - 订阅北交所ETF的tick数据。
+- tick.HK.3 - 订阅港交所ETF的tick数据。
+- time.SZ.1 - 订阅深交所A股的k线数据，包括1m。
+- time.SH.1 - 订阅上交所A股的k线数据，包括1m。
+- time.BJ.1 - 订阅北交所A股的k线数据，包括1m。
+- time.HK.3 - 订阅港交所港股的k线数据，包括1m。
+
+  场景b、按个股订阅
 - 000001.SZ - 订阅深交所平安银行000001的tick数据。支持按股票个数订阅，包括沪深京港四个交易所的股票，最多订阅50个。
-- time.SZ - 订阅深交所A股的k线数据，包括1m。
-- time.SH - 订阅上交所A股的k线数据，包括1m。
-- time.BJ - 订阅北交所A股的k线数据，包括1m。
-- time.HK - 订阅港交所港股的k线数据，包括1m。 <br>
+  入参2：token 登录XTick网站，注册获取
 
-  入参2：token 登录XTick网站，注册获取 <br>
+2.1.2 查询订阅
+1. 请求方法：
+   http://api.xtick.top/doc/unsubscribe?token=043fbdcba7f3f3ab332ffff123456789
+   入参1：token 登录XTick网站，注册获取
 
-取消订阅：http://api.xtick.top/doc/unsubscribe?token=043fbdcba7f3f3ab332ffff123456789 <br>
-入参：token 登录XTick网站，注册获取 <br>
+2.1.3 取消订阅
+1. 请求方法：
+   http://api.xtick.top/doc/querysubscribe?token=043fbdcba7f3f3ab332ffff123456789
+   入参1：token 登录XTick网站，注册获取
 
 2.2 行情数据接口
+
 在GitHub上，已实现Java版本和Python版本的代码，请先下载代码直接调用。 <br>
 
 1. 请求方法：
