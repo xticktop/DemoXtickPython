@@ -90,9 +90,42 @@ class XTickWebSocketClient(object):
         )
         self.ws.run_forever()
 
-
+     # authCodes参数解释
+     # 订阅类别 period.market.type  tick.SH.1
+     # period代表周期，可取枚举值如下：tick time   代表tick数据和K线数据
+     # market代表市场，可取枚举值如下：SZ SH BJ HK 代表深交所、上交所、北交所、港交所
+     # type代表数据类型，可取枚举值如下：1 3 10 20  代表沪深京A股type=1，港股type=3，沪深指数type=10，沪深ETF type=20;
+     #
+     # 最后，总结，大家关注以下枚举值即可
+     # 订阅tick数据可取枚举值如下：
+     # 深交所：tick.SZ.1  tick.SZ.10  tick.SZ.20
+     # 上交所：tick.SH.1  tick.SH.10  tick.SH.20
+     # 北交所：tick.BJ.1
+     # 港交所：tick.HK.3
+     #
+     # 订阅time数据可取枚举值如下：
+     # 深交所：time.SZ.1  time.SZ.10  time.SZ.20
+     # 上交所：time.SH.1  time.SH.10  time.SH.20
+     # 北交所：time.BJ.1
+     # 港交所：time.HK.3
+     # - bid.1 - 订阅沪深京集合竞价数据。
+     # - tick.SZ.1 - 订阅深交所A股的tick数据。
+     # - tick.SZ.10 - 订阅深交所指数的tick数据。
+     # - tick.SZ.20 - 订阅深交所ETF的tick数据。
+     # - tick.SH.1 - 订阅上交所A股的tick数据。
+     # - tick.SH.10 - 订阅上交所指数的tick数据。
+     # - tick.SH.20 - 订阅上交所ETF的tick数据。
+     # - tick.BJ.1 - 订阅北交所ETF的tick数据。
+     # - tick.HK.3 - 订阅港交所ETF的tick数据。
+     # - time.SZ.1 - 订阅深交所A股的k线数据，包括1m。
+     # - time.SH.1 - 订阅上交所A股的k线数据，包括1m。
+     # - time.BJ.1 - 订阅北交所A股的k线数据，包括1m。
+     # - time.HK.3 - 订阅港交所港股的k线数据，包括1m。
 if __name__ == "__main__":
-    auth_codes = ["tick.SZ", "tick.SH", "tick.BJ", "tick.HK"]
+    #auth_codes = ["000001.SZ", "600000.SH", "00001.HK", "920001.BJ", "000001.SH","510300.SH"]
+    #auth_codes = ["bid.1","tick.SZ.1", "tick.SZ.10", "tick.SZ.20", "time.SZ.1", "tick.SH.1","tick.SH.10", "tick.SH.20", "time.SH.1", "tick.BJ.1", "time.BJ.1","tick.HK.3", "time.HK.3"]
+    auth_codes = ["tick.BJ.1"] #新用户，可以订阅北交所的tick行情数据
+
     user_info = json.dumps({
         "token": "",#登录XTick官网，获取token
         "authCodes": auth_codes

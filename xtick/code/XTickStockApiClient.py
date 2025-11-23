@@ -1,8 +1,7 @@
 import io
 import json
-import zipfile
-
 import requests
+import zipfile
 
 '''
 # GitHub: https://github.com/xticktop/xtick
@@ -55,10 +54,8 @@ class XTickWebSocketClient(object):
         startDate: str = "2025-04-25"
         endDate: str = "2025-05-25"
         token: str = ""  # 登录XTick官网，获取token
-        result = self.getMarketData(type, code, "tick", "", startDate, startDate, token, "get")
-        print(f"code={code},period=tick,date={startDate},history data size={len(result)}")
         historyKlinePeriods = ["1m", "5m", "15m", "30m", "1h", "2h", "1d", "1w", "1mon", "1q", "1hy", "1y"]  # K线周期
-        dividends = ["none", "front", "back", "front_ratio", "back_ratio"]  # 复权类型
+        dividends = ["1", "2", "3", "4", "5"]  # 复权类型
         for period in historyKlinePeriods:
             for fq in dividends:
                 result = self.getMarketData(type, code, period, fq, startDate, endDate, token, "get")
@@ -82,7 +79,7 @@ class XTickWebSocketClient(object):
 if __name__ == "__main__":
     xTickClient = XTickWebSocketClient()
     token: str = ""  # 登录XTick官网，获取token
-    result = xTickClient.getMarketData(1, "000001", "1m", "none", "2025-04-25", "2025-05-25", token, "get")
+    result = xTickClient.getMarketData(1, "000001", "1m", "1", "2025-04-25", "2025-05-25", token, "get")
     print(result)
     # xTickClient.demoForFinancialData()
     # xTickClient.demoForMarketData()
