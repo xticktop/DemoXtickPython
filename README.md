@@ -38,6 +38,7 @@ https://github.com/xticktop/xtick <br>
 订阅数据：订阅为Websocket API，请在Github上下载开源项目，参考XTickWebSocketClient.java中已实现的订阅功能。 <br>
 入参1：authCodes 枚举取值如下： <br>
 场景a、按交易所订阅： <br>
+- bid.1 - 订阅沪深京集合竞价数据。
 - tick.SZ.1 - 订阅深交所A股的tick数据。
 - tick.SZ.10 - 订阅深交所指数的tick数据。
 - tick.SZ.20 - 订阅深交所ETF的tick数据。
