@@ -77,7 +77,7 @@ class XTickWebSocketClient(object):
                             return packet
         except Exception as e:
             print(f"Failed to parse data: {e}")
-            print(data.decode('utf-8'))
+            print(data)
             return None
 
     def start(self):
