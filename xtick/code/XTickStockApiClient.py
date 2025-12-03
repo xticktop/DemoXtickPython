@@ -46,7 +46,8 @@ class XTickWebSocketClient(object):
                             return packet
         except Exception as e:
             print(f"Failed to parse data: {e}")
-        return None
+            print(data.decode('utf-8'))
+            return None
 
     def demoForMarketData(self):
         type: int = 1  # 沪深京A股Type=1,港股Type=3,ETF Type=20
