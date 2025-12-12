@@ -31,14 +31,14 @@ class XTickWebSocketClient(object):
         if method == 'post':
             response = requests.post(url, params=params)
             content_encoding = response.headers.get('Content-Encoding', '').lower()
-            if 'zip' in content_encoding:
+            if content_encoding == 'zip':
                 return self.create_packet(response.content)
             else:
                 return json.loads(response.content)
         else:
             response = requests.get(url, params=params)
             content_encoding = response.headers.get('Content-Encoding', '').lower()
-            if 'zip' in content_encoding:
+            if content_encoding == 'zip':
                 return self.create_packet(response.content)
             else:
                 return json.loads(response.content)
@@ -87,7 +87,7 @@ class XTickWebSocketClient(object):
 
 if __name__ == "__main__":
     xTickClient = XTickWebSocketClient()
-    token: str = "e7036ce824c470d02e02f488137af33f"  # 登录XTick官网，获取token
+    token: str = ""  # 登录XTick官网，获取token
     result = xTickClient.getMarketData(1, "000001", "1m", "1", "2025-12-11", "2025-12-11", token, "get")
     print(result)
     # xTickClient.demoForFinancialData()
