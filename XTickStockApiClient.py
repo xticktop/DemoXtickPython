@@ -30,10 +30,18 @@ class XTickWebSocketClient(object):
                   "token": token}
         if method == 'post':
             response = requests.post(url, params=params)
-            return self.create_packet(response.content)
+            content_encoding = response.headers.get('Content-Encoding', '').lower()
+            if 'zip' in content_encoding:
+                return self.create_packet(response.content)
+            else:
+                return json.loads(response.content)
         else:
             response = requests.get(url, params=params)
-            return self.create_packet(response.content)
+            content_encoding = response.headers.get('Content-Encoding', '').lower()
+            if 'zip' in content_encoding:
+                return self.create_packet(response.content)
+            else:
+                return json.loads(response.content)
 
     def create_packet(self, data):
         try:
@@ -46,7 +54,8 @@ class XTickWebSocketClient(object):
                             return packet
         except Exception as e:
             print(f"Failed to parse data: {e}")
-        return None
+            print(data.decode('utf-8'))
+            return None
 
     def demoForMarketData(self):
         type: int = 1  # 沪深京A股Type=1,港股Type=3,ETF Type=20
@@ -55,7 +64,7 @@ class XTickWebSocketClient(object):
         endDate: str = "2025-05-25"
         token: str = ""  # 登录XTick官网，获取token
         historyKlinePeriods = ["1m", "5m", "15m", "30m", "1h", "2h", "1d", "1w", "1mon", "1q", "1hy", "1y"]  # K线周期
-        dividends = ["none", "front", "back", "front_ratio", "back_ratio"]  # 复权类型
+        dividends = ["1", "2", "3", "4", "5"]  # 复权类型
         for period in historyKlinePeriods:
             for fq in dividends:
                 result = self.getMarketData(type, code, period, fq, startDate, endDate, token, "get")
@@ -78,8 +87,8 @@ class XTickWebSocketClient(object):
 
 if __name__ == "__main__":
     xTickClient = XTickWebSocketClient()
-    token: str = ""  # 登录XTick官网，获取token
-    result = xTickClient.getMarketData(1, "000001", "1m", "none", "2025-04-25", "2025-05-25", token, "get")
+    token: str = "e7036ce824c470d02e02f488137af33f"  # 登录XTick官网，获取token
+    result = xTickClient.getMarketData(1, "000001", "1m", "1", "2025-12-11", "2025-12-11", token, "get")
     print(result)
     # xTickClient.demoForFinancialData()
     # xTickClient.demoForMarketData()

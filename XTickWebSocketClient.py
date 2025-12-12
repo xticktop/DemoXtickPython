@@ -77,7 +77,8 @@ class XTickWebSocketClient(object):
                             return packet
         except Exception as e:
             print(f"Failed to parse data: {e}")
-        return None
+            print(data)
+            return None
 
     def start(self):
         self.ws = websocket.WebSocketApp(
@@ -108,7 +109,7 @@ class XTickWebSocketClient(object):
      # 上交所：time.SH.1  time.SH.10  time.SH.20
      # 北交所：time.BJ.1
      # 港交所：time.HK.3
-     #
+     # - bid.1 - 订阅沪深京集合竞价数据。
      # - tick.SZ.1 - 订阅深交所A股的tick数据。
      # - tick.SZ.10 - 订阅深交所指数的tick数据。
      # - tick.SZ.20 - 订阅深交所ETF的tick数据。
@@ -123,7 +124,7 @@ class XTickWebSocketClient(object):
      # - time.HK.3 - 订阅港交所港股的k线数据，包括1m。
 if __name__ == "__main__":
     #auth_codes = ["000001.SZ", "600000.SH", "00001.HK", "920001.BJ", "000001.SH","510300.SH"]
-    #auth_codes = ["tick.SZ.1", "tick.SZ.10", "tick.SZ.20", "time.SZ.1", "tick.SH.1","tick.SH.10", "tick.SH.20", "time.SH.1", "tick.BJ.1", "time.BJ.1","tick.HK.3", "time.HK.3"]
+    #auth_codes = ["bid.1","tick.SZ.1", "tick.SZ.10", "tick.SZ.20", "time.SZ.1", "tick.SH.1","tick.SH.10", "tick.SH.20", "time.SH.1", "tick.BJ.1", "time.BJ.1","tick.HK.3", "time.HK.3"]
     auth_codes = ["tick.BJ.1"] #新用户，可以订阅北交所的tick行情数据
 
     user_info = json.dumps({
