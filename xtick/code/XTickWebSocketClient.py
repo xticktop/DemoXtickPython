@@ -73,15 +73,15 @@ class XTickWebSocketClient(object):
 
     # authCodes参数解释
     # 订阅类别 period.market.type  tick.SH.1
-    # period代表周期，可取枚举值如下：tick time   代表tick数据和K线数据
+    # period代表数据类别，可取枚举值如下：tick bid   代表tick数据和竞价数据
     # market代表市场，可取枚举值如下：SZ SH BJ HK 代表深交所、上交所、北交所、港交所
     # type代表数据类型，可取枚举值如下：1 3 10 20  代表沪深京A股type=1，港股type=3，沪深指数type=10，沪深ETF type=20;
-    #
     # 最后，总结，大家关注以下枚举值即可
     # 订阅tick数据可取枚举值如下：
     # - 000001.SZ - 订阅股票tick数据，按个数订阅。
     # - bid.1 - 订阅沪深京A股集合竞价期间竞价数据。
-    # - quant.1 - 订阅沪深京A股量化因子数据，数据字段参考《3.7 量化指标接口》。
+    # - quant.data.1 - 订阅沪深京A股量化因子数据，数据字段参考《量化指标接口》。推送频率一分钟
+    # - quant.time.1 - 订阅沪深京A股量化因子数据。推送频率为实时
     # - tick.SZ.1 - 订阅深交所A股的tick数据。
     # - tick.SZ.10 - 订阅深交所指数的tick数据。
     # - tick.SZ.20 - 订阅深交所ETF的tick数据。
@@ -98,14 +98,16 @@ class XTickWebSocketClient(object):
     # - minute.SH.20 - 订阅上交所ETF的1分钟k线数据，推送频率为实时。
     # - minute.BJ.1 - 订阅北交所A股的1分钟k线数据，推送频率为实时。
     # - minute.HK.3 - 订阅港交所港股的1分钟k线数据，推送频率为实时。
-    # - time.SZ.1 - 订阅深交所A股的1分钟k线数据，推送频率为一分钟。
-    # - time.SH.1 - 订阅上交所A股的1分钟k线数据，推送频率为一分钟。
-    # - time.BJ.1 - 订阅北交所A股的1分钟k线数据，推送频率为一分钟。
-    # - time.HK.3 - 订阅港交所港股的1分钟k线数据，推送频率为一分钟。
+    # - kline.1m.1 - 订阅沪深京A股的1分钟k线数据，推送频率为一分钟。
+    # - kline.1m.10 - 订阅沪深京指数的1分钟k线数据，推送频率为一分钟。
+    # - kline.1m.20 - 订阅沪深京ETF的1分钟k线数据，推送频率为一分钟。
+    # - kline.1m.3 - 订阅HK股的1分钟k线数据，推送频率为一分钟。
+
+
 if __name__ == "__main__":
-    #auth_codes = ["000001.SZ", "600000.SH", "00001.HK", "920001.BJ", "000001.SH","510300.SH"]
-    #auth_codes = ["bid.1","tick.SZ.1", "tick.SZ.10", "tick.SZ.20", "time.SZ.1", "tick.SH.1","tick.SH.10", "tick.SH.20", "time.SH.1", "tick.BJ.1", "time.BJ.1","tick.HK.3", "time.HK.3"]
-    auth_codes = ["tick.SZ.1", "minute.SZ.1", "time.SZ.1", "tick.HK.3"]  # 新用户，可以订阅北交所的tick行情数据
+    # auth_codes = ["000001.SZ", "600000.SH", "00001.HK", "920001.BJ", "000001.SH","510300.SH"]
+    # auth_codes = ["bid.1","tick.SZ.1", "tick.SZ.10", "tick.SZ.20",  "tick.SH.1","tick.SH.10", "tick.SH.20","tick.BJ.1","tick.HK.3"]
+    auth_codes = ["kline.1m.1", "tick.BJ.3"]  # 新用户，可以订阅北交所的tick行情数据
 
     user_info = json.dumps({
         "token": "8db5dff854625724840c9b02ca48d601",  # 登录XTick官网，获取token

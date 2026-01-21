@@ -10,18 +10,18 @@ from xtick.code.util import XTickUtil
 
 def getTickTime(type: int, code: str, period: str, token: str, method: str = "get") -> str:
     """
-    * 获取沪深京股票交易日盘中实时行情数据，包括tick数据、1分钟数据、日线数据。
+    * 获取沪深京股票交易日盘中实时行情数据，包括买卖五档数据、1分钟数据、日线数据。
     """
-    url = Config.SERVER_URL + "/doc/tick/time"
+    url = Config.SERVER_URL + "/doc/order/time"
     params = {"type": type, "code": code, "period": period, "token": token}
     return XTickUtil.request(url, method, params)
 
 
 def getTickHistory(type: int, code: str, tradeDate: str, token: str, method: str = "get") -> str:
     """
-    * 获取沪深京股票历史Tick数据
+    * 获取沪深京股票历史买卖五档数据
     """
-    url = Config.SERVER_URL + "/doc/tick/history"
+    url = Config.SERVER_URL + "/doc/order/history"
     params = {"type": type, "code": code, "tradeDate": tradeDate, "token": token}
     return XTickUtil.request(url, method, params)
 

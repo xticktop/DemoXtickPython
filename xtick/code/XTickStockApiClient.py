@@ -5,7 +5,7 @@ import pandas as pd
 
 from xtick.code.Config import Config
 from xtick.code.api import XTickMarketApi, XTickIndicatorApi, XTickBaseApi, XTickWebSocketApi, XTickWatchApi, \
-    XTickQuantApi
+    XTickQuantApi, XTickCoreApi
 
 '''
 # GitHub: https://github.com/xticktop/xtick
@@ -55,18 +55,19 @@ class XTickWebSocketClient(object):
         tradeDate: str = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
         endDate: str = datetime.now().strftime("%Y-%m-%d")
         token: str = Config.TOKEN  # 登录XTick官网，获取token
-        print(f"[watch.tick.time]type={type},code={code}:")
-        result = XTickWatchApi.getTickTime(type, code, "tick", token, "get")
-        print(result)
-
-        print(f"[watch.tick.time]type={type},code=all:")
-        result = XTickWatchApi.getTickTime(type, "all", "tick", token, "get")
+        print(f"[watch.order.time]type={type},code={code}:")
+        result = XTickWatchApi.getTickTime(type, code, "lv1", token, "get")
         df = pd.DataFrame(json.loads(result))
         print(df)
 
-        print(f"[watch.tick.history]type={type},code={code},tradeDate={tradeDate}:")
+        print(f"[watch.order.time]type={type},code=all:")
+        result = XTickWatchApi.getTickTime(type, "all", "lv1", token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[watch.order.history]type={type},code={code},tradeDate={tradeDate}:")
         result = XTickWatchApi.getTickHistory(type, code, tradeDate, token, "get")
-        df = pd.DataFrame(result)
+        df = pd.DataFrame(json.loads(result))
         print(df)
 
         print(f"[watch.bid.history]type={type},code={code},startDate={tradeDate},endDate={endDate}:")
@@ -93,19 +94,8 @@ class XTickWebSocketClient(object):
     def demoForQuantApi(self):
         print("#####################################")
         type: int = 1
-        code: str = "000001"
         field: str = "x001,x002,x003,x004,x005"
-        tradeDate: str = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
         token: str = Config.TOKEN  # 登录XTick官网，获取token
-
-        print(f"[core.time]type={type},code={code},field={field}:")
-        result = XTickQuantApi.getCoreTime(type, code, field, token, "get")
-        print(json.loads(result))
-
-        print(f"[core.change]type={type},tradeDate={tradeDate}:")
-        result = XTickQuantApi.getCoreChange(type, tradeDate, token, "get")
-        df = pd.DataFrame(json.loads(result))
-        print(df)
 
         print(f"[quant.data]type={type},field={field}:")
         result = XTickQuantApi.getQunatData(type, field, token, "get")
@@ -115,6 +105,56 @@ class XTickWebSocketClient(object):
         print(f"[quant.data]type={type},field=all:")
         result = XTickQuantApi.getQunatData(type, "all", token, "get")
         df = pd.DataFrame(json.loads(result)['data'])
+        print(df)
+
+    def demoForCoreApi(self):
+        print("#####################################")
+        type: int = 1
+        code: str = "000001"
+        field: str = "x001,x002,x003,x004,x005"
+        startDate: str = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
+        endDate: str = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        tradeDate: str = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+
+        token: str = Config.TOKEN  # 登录XTick官网，获取token
+
+        print(f"[core.time]type={type},code={code},field={field}:")
+        result = XTickCoreApi.getCoreTime(type, code, field, token, "get")
+        print(json.loads(result))
+
+        print(f"[core.chuquan]type={type},startDate=2010-01-01,endDate={endDate}:")
+        result = XTickCoreApi.getCoreChuQuan(type, code, '2010-01-01', endDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[core.tingpai]type={type},startDate=2010-01-01,endDate={endDate}:")
+        result = XTickCoreApi.getCoreTingpai(type, code, '2010-01-01', endDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[core.st]type={type},startDate={startDate},endDate={endDate}:")
+        result = XTickCoreApi.getCoreST(type, '000004', startDate, endDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[core.hitoryprice]type={type},startDate={startDate},endDate={endDate}:")
+        result = XTickCoreApi.getCoreHistoryPrice(type, code, 1, startDate, endDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[core.fenbi]type={type},tradeDate={tradeDate}:")
+        result = XTickCoreApi.getCoreFenbi(type, code, tradeDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[core.fenjia]type={type},tradeDate={tradeDate}:")
+        result = XTickCoreApi.getCoreFenjia(type, code, tradeDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[core.transaction]type={type},tradeDate={tradeDate}:")
+        result = XTickCoreApi.getCoreTransaction(type, code, tradeDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
         print(df)
 
     def demoForMarketApi(self):
@@ -181,13 +221,15 @@ class XTickWebSocketClient(object):
         """
         所有API接口的Demo示例,会调用所有接口，因此调用API接口次数多，请按需调用
         """
-        xTickClient.demoForQuantApi()  # 量化数据Api
-        xTickClient.demoForWatchApi()  # 盯盘数据Api
         xTickClient.demoForWebSocketApi()  # WebSocket查询、取消操作Api
         xTickClient.demoForBaseApi()  # 基本数据Api
-        xTickClient.demoForMarketApi()  # 市场行情数据Api
         xTickClient.demoForFinancialApi()  # 财务报表数据Api
         xTickClient.demoForIndicatorApi()  # 金融指标数据Api
+        xTickClient.demoForMarketApi()  # 市场行情数据Api
+        xTickClient.demoForWatchApi()  # 盯盘数据Api
+        xTickClient.demoForCoreApi()  # 核心数据Api
+        xTickClient.demoForQuantApi()  # 量化数据Api
+
 
 
 if __name__ == "__main__":
@@ -196,4 +238,4 @@ if __name__ == "__main__":
     result = XTickMarketApi.getKlineMarket(1, "000001", "1m", "1", "2025-12-11", "2025-12-11", token, "get")
     print(f"Received data: {result}")
 
-    # xTickClient.allDemo() # 所有API接口的Demo示例,会调用所有接口，因此调用API接口次数多，请按需调用
+    xTickClient.allDemo()  # 所有API接口的Demo示例,会调用所有接口，因此调用API接口次数多，请按需调用

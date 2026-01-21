@@ -31,6 +31,7 @@ def getStockInfo(symbol: str, token: str, method: str = "get") -> str:
      * - kcb - 科创板股票
      * - etf - 全部ETF
      * - st- st股票
+     * - ts- 退市股票
     """
     url = Config.SERVER_URL + "/doc/stockinfo"
     params = {"symbol": symbol, "token": token}
