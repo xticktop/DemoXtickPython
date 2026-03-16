@@ -533,12 +533,6 @@ Github地址：https://github.com/xticktop/xtick <br>
 如遇问题联系作者，邮箱：xticktop@163.com <br>
 [网站说明文档](https://ccn9lag3l54q.feishu.cn/wiki/ABenwEvDOiShYrkaLAJcFY5gnZf)<br>
 
-| QQ群【推荐】                                                                                  |
-|------------------------------------------------------------------------------------------|
-| <img src="./doc/images/qqGroup.png" width="200"  height="200" /> |
-
-
-
 
 
 

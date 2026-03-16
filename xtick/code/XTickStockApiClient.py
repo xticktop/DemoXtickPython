@@ -52,7 +52,7 @@ class XTickWebSocketClient(object):
         print("#####################################")
         type: int = 1
         code: str = "000001"
-        tradeDate: str = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        tradeDate: str = datetime.now().strftime("%Y-%m-%d")
         endDate: str = datetime.now().strftime("%Y-%m-%d")
         token: str = Config.TOKEN  # 登录XTick官网，获取token
         print(f"[watch.order.time]type={type},code={code}:")
@@ -91,6 +91,11 @@ class XTickWebSocketClient(object):
         df = pd.DataFrame(json.loads(result))
         print(df)
 
+        print(f"[watch.amount]tradeDate={tradeDate}:")
+        result = XTickWatchApi.getAmount(tradeDate, token, "get")
+        df = json.loads(result)
+        print(df)
+
     def demoForQuantApi(self):
         print("#####################################")
         type: int = 1
@@ -114,7 +119,7 @@ class XTickWebSocketClient(object):
         field: str = "x001,x002,x003,x004,x005"
         startDate: str = (datetime.now() - timedelta(days=30)).strftime("%Y-%m-%d")
         endDate: str = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
-        tradeDate: str = (datetime.now() - timedelta(days=1)).strftime("%Y-%m-%d")
+        tradeDate: str = datetime.now().strftime("%Y-%m-%d")
 
         token: str = Config.TOKEN  # 登录XTick官网，获取token
 
@@ -152,8 +157,14 @@ class XTickWebSocketClient(object):
         df = pd.DataFrame(json.loads(result))
         print(df)
 
-        print(f"[core.transaction]type={type},tradeDate={tradeDate}:")
-        result = XTickCoreApi.getCoreTransaction(type, code, tradeDate, token, "get")
+        print(f"[core.money]type={type},tradeDate={tradeDate}:")
+        result = XTickCoreApi.getCoreMoney(type, "all", tradeDate, tradeDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        flag: int = 1
+        print(f"[core.board]type={type},flag={flag},tradeDate={tradeDate}:")
+        result = XTickCoreApi.getCoreBoard(type, flag, tradeDate, token, "get")
         df = pd.DataFrame(json.loads(result))
         print(df)
 
@@ -238,4 +249,4 @@ if __name__ == "__main__":
     result = XTickMarketApi.getKlineMarket(1, "000001", "1m", "1", "2025-12-11", "2025-12-11", token, "get")
     print(f"Received data: {result}")
 
-    xTickClient.allDemo()  # 所有API接口的Demo示例,会调用所有接口，因此调用API接口次数多，请按需调用
+    #xTickClient.allDemo()  # 所有API接口的Demo示例,会调用所有接口，因此调用API接口次数多，请按需调用

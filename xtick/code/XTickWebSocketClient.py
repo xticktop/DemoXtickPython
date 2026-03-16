@@ -106,11 +106,11 @@ class XTickWebSocketClient(object):
 
 if __name__ == "__main__":
     # auth_codes = ["000001.SZ", "600000.SH", "00001.HK", "920001.BJ", "000001.SH","510300.SH"]
-    # auth_codes = ["bid.1","tick.SZ.1", "tick.SZ.10", "tick.SZ.20",  "tick.SH.1","tick.SH.10", "tick.SH.20","tick.BJ.1","tick.HK.3"]
-    auth_codes = ["kline.1m.1", "tick.BJ.3"]  # 新用户，可以订阅北交所的tick行情数据
+    auth_codes = ["bid.1"]
+    # auth_codes = ["kline.1m.1", "tick.BJ.3"]  # 新用户，可以订阅北交所的tick行情数据
 
     user_info = json.dumps({
-        "token": "8db5dff854625724840c9b02ca48d601",  # 登录XTick官网，获取token
+        "token": "e4889e3b2464dc5a5d9a899b92b0b62b",  # 登录XTick官网，获取token
         "authCodes": auth_codes
     })
     user_encoded = urllib.parse.quote(user_info)

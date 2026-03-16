@@ -60,3 +60,11 @@ def getBidTimeWithOption(type: int, code: str, option: {}, token: str, method: s
     url = Config.SERVER_URL + "/doc/bid/time"
     params = {"type": type, "code": code, "option": option, "token": token}
     return XTickUtil.request(url, method, params)
+
+def getAmount( tradeDate: str, token: str, method: str = "get") -> str:
+    """
+     * 按交易日，获取全市场成交额统计，包括科创板、创业板、北证、两市等成交额统计。
+    """
+    url = Config.SERVER_URL + "/doc/order/amount"
+    params = {"tradeDate": tradeDate, "token": token}
+    return XTickUtil.request(url, method, params)
