@@ -532,6 +532,7 @@ Github地址：https://github.com/xticktop/xtick <br>
 ，目前项目还存在很多不足之处，欢迎各位大佬进群进行交流，为了防止广告进入，希望加群的时候能添加备注，谢谢~<br>
 如遇问题联系作者，邮箱：xticktop@163.com <br>
 [网站说明文档](https://ccn9lag3l54q.feishu.cn/wiki/ABenwEvDOiShYrkaLAJcFY5gnZf)<br>
+**注意**: 本项目仅供学习和研究使用，请勿用于商业用途。使用时请遵守XTick的使用条款。
 
 
 

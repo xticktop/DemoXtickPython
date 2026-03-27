@@ -76,34 +76,6 @@ def getCoreFenjia(type: int, code: str, tradeDate: str, token: str, method: str 
     params = {"type": type, "tradeDate": tradeDate, "code": code, "token": token}
     return XTickUtil.request(url, method, params)
 
-
-def getCoreMoney(type: int, code: str, startDate: str, endDate: str, token: str, method: str = "get") -> str:
-    """
-    获取沪深京股票交易日盘中资金流数据。盘中实时更新。
-    资金区分标准如下：
-    特大单：成交金额大于或等于100万元或成交量大于或等于5000手
-    大单：成交金额大于或等于20万元或成交量大于或等于1000手
-    中单：成交金额大于或等于4万元或成交量大于或等于200手
-    小单：其它为小单
-    """
-    url = Config.SERVER_URL + "/doc/core/money"
-    params = {"type": type, "code": code, "startDate": startDate, "endDate": endDate, "token": token}
-    return XTickUtil.request(url, method, params)
-
-
-def getCoreBoard(type: int, flag: int, tradeDate: str, token: str, method: str = "get") -> str:
-    """
-     * 获取沪深京股票交易日盘中盘中涨停、跌停、炸板数据。盘中实时更新。
-     * flag ，枚举取值如下：
-     * - 1 - 涨停
-     * - 2 - 跌停
-     * - 3 - 炸板
-    """
-    url = Config.SERVER_URL + "/doc/core/board"
-    params = {"type": type, "flag": flag, "tradeDate": tradeDate, "token": token}
-    return XTickUtil.request(url, method, params)
-
-
 def getDayUpdate(dataType: str, symbol: str, tradeDate: str, token: str, method: str = "get") -> str:
     """
      * 提供交易日当天全市场增量数据的更新。这个接口单次获取数据量大，请不要频繁获取，该接口严格限流。

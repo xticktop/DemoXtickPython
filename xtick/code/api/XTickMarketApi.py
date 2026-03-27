@@ -50,7 +50,7 @@ def getKlineMarket(type: int, code: str, period: str, fq: str, startDate: str, e
 
 def getKlineMinute(type: int, code: str, fq: str, token: str, method: str = "get") -> str:
     """
-    * 提供日内一分钟实时数据，包括盘前9:15-25内竞价阶段数据。
+    * 提供日内一分钟实时数据。
     """
     url = Config.SERVER_URL + "/doc/kline/minute"
     params = {"type": type, "code": code, "fq": fq, "token": token}

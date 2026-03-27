@@ -68,3 +68,12 @@ def getAmount( tradeDate: str, token: str, method: str = "get") -> str:
     url = Config.SERVER_URL + "/doc/order/amount"
     params = {"tradeDate": tradeDate, "token": token}
     return XTickUtil.request(url, method, params)
+
+def getLonghubang(tradeDate: str, token: str, method: str = "get") -> str:
+    """
+    * 龙虎榜详情历史数据。盘后获取。
+    """
+    url = Config.SERVER_URL + "/doc/order/longhubang"
+    params = {"tradeDate": tradeDate, "token": token}
+    return XTickUtil.request(url, method, params)
+

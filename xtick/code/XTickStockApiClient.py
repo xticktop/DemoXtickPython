@@ -5,7 +5,7 @@ import pandas as pd
 
 from xtick.code.Config import Config
 from xtick.code.api import XTickMarketApi, XTickIndicatorApi, XTickBaseApi, XTickWebSocketApi, XTickWatchApi, \
-    XTickQuantApi, XTickCoreApi
+    XTickQuantApi, XTickCoreApi, XTickHotApi
 
 '''
 # GitHub: https://github.com/xticktop/xtick
@@ -96,6 +96,11 @@ class XTickWebSocketClient(object):
         df = json.loads(result)
         print(df)
 
+        print(f"[watch.longhubang]tradeDate={tradeDate}:")
+        result = XTickWatchApi.getLonghubang(tradeDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
     def demoForQuantApi(self):
         print("#####################################")
         type: int = 1
@@ -157,14 +162,33 @@ class XTickWebSocketClient(object):
         df = pd.DataFrame(json.loads(result))
         print(df)
 
-        print(f"[core.money]type={type},tradeDate={tradeDate}:")
-        result = XTickCoreApi.getCoreMoney(type, "all", tradeDate, tradeDate, token, "get")
+    def demoForHotApi(self):
+        print("#####################################")
+        type: int = 1
+        minutes: int = 15
+        code: str = "000001";
+        tradeDate: str = datetime.now().strftime("%Y-%m-%d")
+
+        token: str = Config.TOKEN  # 登录XTick官网，获取token
+
+        print(f"[hot.money]type={type},tradeDate={tradeDate}:")
+        result = XTickHotApi.getHotMoney(type, "all", tradeDate, tradeDate, token, "get")
         df = pd.DataFrame(json.loads(result))
         print(df)
 
         flag: int = 1
-        print(f"[core.board]type={type},flag={flag},tradeDate={tradeDate}:")
-        result = XTickCoreApi.getCoreBoard(type, flag, tradeDate, token, "get")
+        print(f"[hot.board]type={type},flag={flag},tradeDate={tradeDate}:")
+        result = XTickHotApi.getHotBoard(type, flag, tradeDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[hot.news]minutes={minutes},tradeDate={tradeDate}:")
+        result = XTickHotApi.getHotNews(minutes, tradeDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[hot.timekline]type={type},code={code}:")
+        result = XTickHotApi.getHotTimekline(type, code, token, "get")
         df = pd.DataFrame(json.loads(result))
         print(df)
 
@@ -239,6 +263,7 @@ class XTickWebSocketClient(object):
         xTickClient.demoForMarketApi()  # 市场行情数据Api
         xTickClient.demoForWatchApi()  # 盯盘数据Api
         xTickClient.demoForCoreApi()  # 核心数据Api
+        xTickClient.demoForHotApi()  # 短线热点Api
         xTickClient.demoForQuantApi()  # 量化数据Api
 
 
@@ -249,4 +274,4 @@ if __name__ == "__main__":
     result = XTickMarketApi.getKlineMarket(1, "000001", "1m", "1", "2025-12-11", "2025-12-11", token, "get")
     print(f"Received data: {result}")
 
-    #xTickClient.allDemo()  # 所有API接口的Demo示例,会调用所有接口，因此调用API接口次数多，请按需调用
+    xTickClient.demoForHotApi()  # 所有API接口的Demo示例,会调用所有接口，因此调用API接口次数多，请按需调用
