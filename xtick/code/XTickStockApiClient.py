@@ -75,10 +75,6 @@ class XTickWebSocketClient(object):
         df = pd.DataFrame(json.loads(result))
         print(df)
 
-        print(f"[watch.bid.detail]type={type},code={code},tradeDate={tradeDate}:")
-        result = XTickWatchApi.getBidDetail(type, code, tradeDate, token, "get")
-        df = pd.DataFrame(json.loads(result))
-        print(df)
 
         print(f"[watch.bid.time]type={type},code=all:")
         result = XTickWatchApi.getBidTime(type, "all", token, "get")
@@ -131,6 +127,11 @@ class XTickWebSocketClient(object):
         print(f"[core.time]type={type},code={code},field={field}:")
         result = XTickCoreApi.getCoreTime(type, code, field, token, "get")
         print(json.loads(result))
+
+        print(f"[core.biddetail]type={type},code={code},tradeDate={tradeDate}:")
+        result = XTickCoreApi.getBidDetail(type, code, tradeDate, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
 
         print(f"[core.chuquan]type={type},startDate=2010-01-01,endDate={endDate}:")
         result = XTickCoreApi.getCoreChuQuan(type, code, '2010-01-01', endDate, token, "get")
@@ -189,6 +190,16 @@ class XTickWebSocketClient(object):
 
         print(f"[hot.timekline]type={type},code={code}:")
         result = XTickHotApi.getHotTimekline(type, code, token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[hot.bk]symbol=sw1:")
+        result = XTickHotApi.getHotBk("sw1", token, "get")
+        df = pd.DataFrame(json.loads(result))
+        print(df)
+
+        print(f"[hot.gainian]code={code}:")
+        result = XTickHotApi.getHotGainian(code, token, "get")
         df = pd.DataFrame(json.loads(result))
         print(df)
 
@@ -274,4 +285,5 @@ if __name__ == "__main__":
     result = XTickMarketApi.getKlineMarket(1, "000001", "1m", "1", "2025-12-11", "2025-12-11", token, "get")
     print(f"Received data: {result}")
 
-    xTickClient.demoForHotApi()  # 所有API接口的Demo示例,会调用所有接口，因此调用API接口次数多，请按需调用
+    #xTickClient.demoForHotApi()  # 所有API接口的Demo示例,会调用所有接口，因此调用API接口次数多，请按需调用
+    xTickClient.allDemo()

@@ -106,8 +106,7 @@ class XTickWebSocketClient(object):
 
 if __name__ == "__main__":
     # auth_codes = ["000001.SZ", "600000.SH", "00001.HK", "920001.BJ", "000001.SH","510300.SH"]
-    auth_codes = ["bid.1"]
-    # auth_codes = ["kline.1m.1", "tick.BJ.3"]  # 新用户，可以订阅北交所的tick行情数据
+    auth_codes = ["tick.BJ.1"]  # 新用户，可以订阅北交所的tick行情数据
 
     user_info = json.dumps({
         "token": "e4889e3b2464dc5a5d9a899b92b0b62b",  # 登录XTick官网，获取token

@@ -76,6 +76,15 @@ def getCoreFenjia(type: int, code: str, tradeDate: str, token: str, method: str 
     params = {"type": type, "tradeDate": tradeDate, "code": code, "token": token}
     return XTickUtil.request(url, method, params)
 
+def getBidDetail(type: int, code: str, tradeDate: str, token: str, method: str = "get") -> str:
+    """
+    * 开盘竞价阶段，个股的所有竞价信息。当天竞价完成后，9:25更新完数据。
+    """
+    url = Config.SERVER_URL + "/doc/core/biddetail"
+    params = {"type": type, "code": code, "tradeDate": tradeDate, "token": token}
+    return XTickUtil.request(url, method, params)
+
+
 def getDayUpdate(dataType: str, symbol: str, tradeDate: str, token: str, method: str = "get") -> str:
     """
      * 提供交易日当天全市场增量数据的更新。这个接口单次获取数据量大，请不要频繁获取，该接口严格限流。

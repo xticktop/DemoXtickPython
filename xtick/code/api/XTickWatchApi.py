@@ -26,14 +26,6 @@ def getTickHistory(type: int, code: str, tradeDate: str, token: str, method: str
     return XTickUtil.request(url, method, params)
 
 
-def getBidDetail(type: int, code: str, tradeDate: str, token: str, method: str = "get") -> str:
-    """
-    * 开盘竞价阶段，个股的所有竞价信息。当天竞价完成后，9:25更新完数据。
-    """
-    url = Config.SERVER_URL + "/doc/bid/detail"
-    params = {"type": type, "code": code, "tradeDate": tradeDate, "token": token}
-    return XTickUtil.request(url, method, params)
-
 
 def getBidHistory(type: int, code: str, startDate: str, endDate: str, token: str, method: str = "get") -> str:
     """

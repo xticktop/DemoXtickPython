@@ -521,6 +521,14 @@ https://github.com/xticktop/xtick <br>
 
 目前项目托管在 Gitee 和 Github 平台上中，欢迎大家 Star 和 Fork 支持~ <br>
 
+## 小龙虾投喂文档
+1、直接给AI投喂MD文档： <br>
+接口文档路径：/doc/references下 <br>
+
+2、XTick的最新skills开源项目 <br>
+https://gitee.com/xtick/skills <br>
+https://github.com/xticktop/skills <br>
+
 ### Java SDK :
 
 Gitee地址：https://github.com/xticktop/xtick <br>

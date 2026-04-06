@@ -47,8 +47,9 @@ def getHotNews(minutes: int, tradeDate: str, token: str, method: str = "get") ->
     params = {"minutes": minutes, "tradeDate": tradeDate,  "token": token}
     return XTickUtil.request(url, method, params)
 
+
 def getHotTimekline(type: int, code: str, token: str,
-                       method: str = "get") -> str:
+                    method: str = "get") -> str:
     """
      * 获取股票盘中日内分时数据，保留了价格在每个时间点的变化细节，股价全天的波动轨迹。盘中实时更新。
      """
@@ -56,3 +57,33 @@ def getHotTimekline(type: int, code: str, token: str,
     params = {"type": type, "code": code, "token": token}
     return XTickUtil.request(url, method, params)
 
+
+def getHotBk(symbol: str, token: str, method: str = "get") -> str:
+    """
+    * 获取概念板块、地域板块、行业板块数据，以及概念板块下对应的成分股数据。
+     * symbol 用于表示要获取的概念板块的分类，枚举取值如下：
+     * - sw1 - 申万一级行业划分
+     * - sw2 - 申万二级行业划分
+     * - sw3 - 申万三级行业划分
+     * - zjh1 -  证监会一级行业划分
+     * - zjh2 -  证监会二级行业划分
+     * - ahy - A平台行业划分
+     * - afg - A平台风格划分
+     * - agn - A平台概念划分
+     * - bgn - B平台概念划分
+     * - bdy1 - B平台一级地域划分
+     * - bdy1 - B平台二级地域划分
+     * - cgn -  C平台概念划分
+     """
+    url = Config.SERVER_URL + "/doc/hot/bk"
+    params = {"symbol": symbol, "token": token}
+    return XTickUtil.request(url, method, params)
+
+
+def getHotGainian(code: str, token: str, method: str = "get") -> str:
+    """
+     * 获取个股关联的概念板块、地域板块、行业板块数据。
+     """
+    url = Config.SERVER_URL + "/doc/hot/gainian"
+    params = {"code": code, "token": token}
+    return XTickUtil.request(url, method, params)
