@@ -1,548 +1,666 @@
-# XTick
+# XTick 金融行情数据平台
 
-<p align=center>
+<p align="center">
   <a href="http://www.xtick.top/">
-    <img src="./doc/images/xticklogo.png" alt="实时行情报价数据接口" style="width:260px;height:120px">
+    <img src="./doc/images/xticklogo.png" alt="XTick Logo" style="width:260px;height:120px">
   </a>
 </p>
 
-<p align=center>
-   XTick提供实时行情报价数据接入解决方案。
+<p align="center">
+  <strong>专业金融行情数据API服务平台</strong>
 </p>
 
-## 项目介绍
-
-XTick行情API提供了全面、准确、稳定的行情数据，帮助开发者和研究者构建创新的交易和分析工具，满足金融行业的需求，进行深入的市场分析和模型验证。
-<br>您的支持，是我们继续维护好XTick项目的动力。<br>
-XTick官网：http://www.xtick.top <br>
-<p align=center>
+<p align="center">
+  <a href="https://github.com/xticktop/xtick">
+    <img src="https://img.shields.io/badge/GitHub-XTick-blue.svg" alt="GitHub">
+  </a>
   <a href="http://www.xtick.top/">
-    <img src="./doc/images/xtick.png" alt="实时行情报价数据接口">
+    <img src="https://img.shields.io/badge/Website-XTick-green.svg" alt="Website">
+  </a>
+  <a href="https://img.shields.io/badge/Python-3.8+-blue.svg">
+    <img src="https://img.shields.io/badge/Python-3.8+-blue.svg" alt="Python">
+  </a>
+  <a href="https://img.shields.io/badge/License-MIT-yellow.svg">
+    <img src="https://img.shields.io/badge/License-MIT-yellow.svg" alt="License">
   </a>
 </p>
 
-## 已接入数据预览
+---
 
-<p><strong>接入数据预览</strong></p>
-<table style="width:89%;">
-<colgroup>
-<col style="width: 9%" />
-<col style="width: 13%" />
-<col style="width: 14%" />
-<col style="width: 11%" />
-<col style="width: 13%" />
-<col style="width: 26%" />
-</colgroup>
-<tbody>
-<tr>
-<td style="text-align: left;">数据类别</td>
-<td style="text-align: left;">数据细分</td>
-<td style="text-align: left;">更新方式</td>
-<td style="text-align: left;">数据全推</td>
-<td style="text-align: left;">获取方式</td>
-<td style="text-align: left;">历史数据范围</td>
-</tr>
-<tr>
-<td rowspan="2" style="text-align: center;">tick数据</td>
-<td style="text-align: left;">tick实时数据</td>
-<td style="text-align: left;">实时更新</td>
-<td style="text-align: left;">数据全推</td>
-<td style="text-align: left;">api调用、ws推送</td>
-<td rowspan="2" style="text-align: left;"><p>指数和北证：2025年10月-至今</p>
-<p>A股、ETF：2025年2月-至今</p></td>
-</tr>
-<tr>
-<td style="text-align: left;">tick历史数据</td>
-<td style="text-align: left;">盘后更新</td>
-<td style="text-align: left;">按个股获取</td>
-<td style="text-align: left;">api调用</td>
-</tr>
-<tr>
-<td rowspan="3" style="text-align: center;">竞价数据</td>
-<td style="text-align: left;">竞价实时数据</td>
-<td style="text-align: left;">实时更新</td>
-<td style="text-align: left;">数据全推</td>
-<td style="text-align: left;">api调用、ws推送</td>
-<td rowspan="3" style="text-align: left;"><p>竞价历史：2025年7月-至今</p>
-<p>竞价历史详情：2025年2月-至今</p></td>
-</tr>
-<tr>
-<td style="text-align: left;">竞价历史数据</td>
-<td style="text-align: left;">9:25分更新</td>
-<td style="text-align: left;">数据全推</td>
-<td style="text-align: left;">api调用</td>
-</tr>
-<tr>
-<td style="text-align: left;">竞价历史详情数据</td>
-<td style="text-align: left;">9:25分更新</td>
-<td style="text-align: left;">按个股获取</td>
-<td style="text-align: left;">api调用</td>
-</tr>
-<tr>
-<td rowspan="3" style="text-align: center;">分钟数据</td>
-<td style="text-align: left;">1分钟实时数据</td>
-<td style="text-align: left;">实时更新</td>
-<td style="text-align: left;">数据全推</td>
-<td style="text-align: left;">ws推送、ws推送</td>
-<td rowspan="3" style="text-align: left;"><p>分钟级别数据：2024年4月-至今</p>
-<p>所有分钟周期数据，均支持复权</p></td>
-</tr>
-<tr>
-<td style="text-align: left;">1分钟K线数据</td>
-<td style="text-align: left;">按1分钟频率实时更新</td>
-<td style="text-align: left;">数据全推</td>
-<td style="text-align: left;">api调用、ws推送</td>
-</tr>
-<tr>
-<td style="text-align: left;">其它分钟K线数据</td>
-<td style="text-align: left;">按1分钟频率实时更新</td>
-<td style="text-align: left;">按个股获取</td>
-<td style="text-align: left;">api调用</td>
-</tr>
-<tr>
-<td rowspan="2" style="text-align: center;">日线数据</td>
-<td style="text-align: left;">日线实时数据</td>
-<td style="text-align: left;">实时更新</td>
-<td style="text-align: left;">数据全推</td>
-<td style="text-align: left;">api调用</td>
-<td rowspan="2" style="text-align: left;"><p>日线级别数据：公司上市-至今</p>
-<p>日线数据支持复权</p></td>
-</tr>
-<tr>
-<td style="text-align: left;">日线历史数据</td>
-<td style="text-align: left;">3:05分更新</td>
-<td style="text-align: left;">数据全推</td>
-<td style="text-align: left;">api调用</td>
-</tr>
-<tr>
-<td rowspan="2" style="text-align: center;">量化数据</td>
-<td style="text-align: left;">量化因子实时数据</td>
-<td style="text-align: left;">实时更新</td>
-<td style="text-align: left;">数据全推</td>
-<td style="text-align: left;">api调用、ws推送</td>
-<td rowspan="2" style="text-align: left;">2008年1月-至今</td>
-</tr>
-<tr>
-<td style="text-align: left;">量化因子历史数据</td>
-<td style="text-align: left;">3:05分更新</td>
-<td style="text-align: left;">数据全推</td>
-<td style="text-align: left;">api调用</td>
-</tr>
-<tr>
-<td style="text-align: center;">核心指标</td>
-<td style="text-align: left;">核心指标实时数据</td>
-<td style="text-align: left;">实时更新</td>
-<td style="text-align: left;">按个股获取</td>
-<td style="text-align: left;">api调用</td>
-<td style="text-align: left;">参考量化数据</td>
-</tr>
-<tr>
-<td rowspan="2" style="text-align: center;">金融指标</td>
-<td style="text-align: left;">金融指标实时数据</td>
-<td style="text-align: left;">实时更新</td>
-<td style="text-align: left;">按个股获取</td>
-<td style="text-align: left;">api调用</td>
-<td rowspan="2" style="text-align: left;"><p>分钟级别指标：2024年4月-至今</p>
-<p>日线级别指标：公司上市-至今</p></td>
-</tr>
-<tr>
-<td style="text-align: left;">金融指标历史数据</td>
-<td style="text-align: left;">3:05分更新</td>
-<td style="text-align: left;">按个股获取</td>
-<td style="text-align: left;">api调用</td>
-</tr>
-<tr>
-<td style="text-align: center;">财务数据</td>
-<td style="text-align: left;">盘后更新</td>
-<td style="text-align: left;">盘后更新</td>
-<td style="text-align: left;">按个股获取</td>
-<td style="text-align: left;">api调用</td>
-<td style="text-align: left;">2008年1月-至今</td>
-</tr>
-<tr>
-<td rowspan="3" style="text-align: center;">其它数据</td>
-<td style="text-align: left;">交易日历</td>
-<td style="text-align: left;">3:05分更新</td>
-<td style="text-align: left;">按个股获取</td>
-<td style="text-align: left;">api调用</td>
-<td style="text-align: left;">公司上市-至今</td>
-</tr>
-<tr>
-<td style="text-align: left;">股票列表</td>
-<td style="text-align: left;">盘后更新</td>
-<td style="text-align: left;">按个股获取</td>
-<td style="text-align: left;">api调用</td>
-<td style="text-align: left;">每日更新</td>
-</tr>
-<tr>
-<td style="text-align: left;">复权变更数据</td>
-<td style="text-align: left;">盘后更新</td>
-<td style="text-align: left;">按个股获取</td>
-<td style="text-align: left;">api调用</td>
-<td style="text-align: left;">公司上市-至今</td>
-</tr>
-</tbody>
-</table>
+## 📖 项目介绍
 
+XTick是一个专业的金融行情数据API服务平台，为量化交易、投资分析、金融研究提供强大的数据支撑。平台提供沪深京A股、港股、指数、ETF、可转债等全市场的实时和历史行情数据。
 
-## API接口文档
+### ✨ 核心特性
 
-API接口分为订阅数据、行情数据、财务数据、金融指标数据四个部分。行情数据支持盘中实时更新。 <br>
-除了订阅接口是Websocket API，其余接口为Http API接口且均支持GET和POST方法，下面以GET请求示例。 <br>
+- 🚀 **实时行情**：盘中实时推送分钟级、Tick级行情数据
+- 📊 **历史数据**：覆盖多年的K线、财务、股东等历史数据
+- 🔢 **量化因子**：提供丰富的量化因子和技术指标计算
+- 📈 **短线热点**：连板天梯、市场情绪、资金流向等短线交易数据
+- 🌐 **多语言支持**：提供Java、Python等多语言SDK
+- ⚡ **高性能**：支持批量查询和全市场数据推送
+- 🔒 **安全可靠**：Token认证机制，保障数据安全
 
-2.1 订阅数据接口 <br>
-在GitHub上，已实现Java版本和Python版本的订阅代码，请先下载代码直接调用。 <br>
-GitHub代码下载地址： <br>
-https://github.com/xticktop/xtick <br>
+---
 
-订阅数据按照证券交易所订阅推送，包括上交所、深交所、北交所、港交所（只支持部分股票）。 <br>
-数据为实时推送，发数据非常快，客户端接受到数据后，最好做异步处理，将接受数据和数据处理分开，避免接受数据阻塞。切记...切记...切记：数据接受和数据处理，务必放在两个线程中，不要阻塞数据接受。
+## 📊 数据覆盖范围
 
-2.1.1 订阅接口 <br>
-订阅数据：订阅为Websocket API，请在Github上下载开源项目，参考XTickWebSocketClient.java中已实现的订阅功能。 <br>
-入参1：authCodes 枚举取值如下： <br>
-场景a、按交易所订阅： <br>
-- bid.1 - 订阅沪深京A股集合竞价期间竞价数据。
-- quant.1 - 订阅沪深京A股量化因子数据，数据字段参考《3.7 量化指标接口》。
-- tick.SZ.1 - 订阅深交所A股的tick数据。
-- tick.SZ.10 - 订阅深交所指数的tick数据。
-- tick.SZ.20 - 订阅深交所ETF的tick数据。
-- tick.SH.1 - 订阅上交所A股的tick数据。
-- tick.SH.10 - 订阅上交所指数的tick数据。
-- tick.SH.20 - 订阅上交所ETF的tick数据。
-- tick.BJ.1 - 订阅北交所ETF的tick数据。
-- tick.HK.3 - 订阅港交所ETF的tick数据。
-- minute.SZ.1 - 订阅深交所A股的1分钟k线数据，推送频率为实时。
-- minute.SZ.10 - 订阅深交所指数的1分钟k线数据，推送频率为实时。
-- minute.SZ.20 - 订阅深交所ETF的1分钟k线数据，推送频率为实时。
-- minute.SH.1 - 订阅上交所A股的1分钟k线数据，推送频率为实时。
-- minute.SH.10 - 订阅上交所指数的1分钟k线数据，推送频率为实时。
-- minute.SH.20 - 订阅上交所ETF的1分钟k线数据，推送频率为实时。
-- minute.BJ.1 - 订阅北交所A股的1分钟k线数据，推送频率为实时。
-- minute.HK.3 - 订阅港交所港股的1分钟k线数据，推送频率为实时。
-- kline.1m.1 - 订阅沪深京A股的1分钟k线数据，推送频率为一分
-- kline.1m.10 - 订阅沪深京指数的1分钟k线数据，推送频率为一分钟。
-- kline.1m.20 - 订阅沪深京ETF的1分钟k线数据，推送频率为一分钟。
-- kline.1m.3- 订阅港股的1分钟k线数据，推送频率为一分钟。
+| 数据类别 | 数据细分 | 更新方式 | 历史数据范围 |
+|---------|---------|---------|-------------|
+| **Tick数据** | Tick实时数据 | 实时更新 | A股、ETF：2025年2月至今 |
+| | Tick历史数据 | 盘后更新 | 指数和北证：2025年10月至今 |
+| **竞价数据** | 竞价实时数据 | 实时更新 | 竞价历史：2025年7月至今 |
+| | 竞价历史数据 | 9:25分更新 | 竞价详情：2025年2月至今 |
+| **分钟数据** | 1分钟实时数据 | 实时更新 | 2024年4月至今 |
+| | 其它周期K线 | 按分钟频率更新 | 支持复权 |
+| **日线数据** | 日线实时数据 | 实时更新 | 公司上市至今 |
+| | 日线历史数据 | 15:05更新 | 支持复权 |
+| **量化数据** | 量化因子实时 | 实时更新 | 2008年1月至今 |
+| | 量化因子历史 | 15:05更新 | - |
+| **财务数据** | 财务报表 | 盘后更新 | 2008年1月至今 |
+| **技术指标** | 分钟级指标 | 实时更新 | 2024年4月至今 |
+| | 日线级指标 | 15:05更新 | 公司上市至今 |
 
-  场景b、按个股订阅
-- 000001.SZ - 订阅深交所平安银行000001的tick数据。支持按股票个数订阅，包括沪深京港四个交易所的股票，最多订阅50个。
-  入参2：token 登录XTick网站，注册获取
+---
 
-2.1.2 查询订阅
-1. 请求方法：
-   http://api.xtick.top/doc/unsubscribe?token=043fbdcba7f3f3ab332ffff123456789
-   入参1：token 登录XTick网站，注册获取
+## 📡 API接口文档
 
-2.1.3 取消订阅
-1. 请求方法：
-   http://api.xtick.top/doc/querysubscribe?token=043fbdcba7f3f3ab332ffff123456789
-   入参1：token 登录XTick网站，注册获取
+XTick平台提供**七大类API接口**，共计**88+个接口**。
 
-2.2 行情数据接口
+### 接口分类总览
 
-在GitHub上，已实现Java版本和Python版本的代码，请先下载代码直接调用。 <br>
+| 接口分类 | 接口数量 | 主要功能 |
+|---------|---------|----------|
+| 行情数据接口 | 8个 | 股票列表、交易日历、K线数据、财务数据等 |
+| 盯盘数据接口 | 7个 | 龙虎榜、日K线、分钟K线、买卖五档、成交统计等 |
+| 核心数据接口 | 8个 | 竞价数据、核心指标、除权、停牌、ST、分笔分价等 |
+| 短线热点接口 | 10个 | 连板天梯、市场情绪、资金流向、新闻、概念板块等 |
+| 量化因子接口 | 2个 | 实时和历史量化因子数据 |
+| 金融指标接口 | 51+个 | MACD、RSI、KDJ等技术指标计算 |
+| WebSocket接口 | 2个 | 订阅查询、取消订阅 |
 
-1. 请求方法：
-   请求地址：http://api.xtick.top/doc/market?type=1&code=000001&period=1d&fq=none&startDate=2025-03-25&endDate=2025-03-25&token=043fbdcba7f3f3ab332ffff123456789
-   备注：行情数据支持交易日内盘内实时更新，如有需要其他K线数据，比如三分钟k线或者2小时K线等，可联系作者。<br>
-   入参1：type 股票类别 <br>
-   沪深京A股type=1，港股type=3，沪深指数type=10，沪深ETF type=20;<br>
-   入参2：code 股票代码 <br>
-   比如平安银行为000001 <br>
-   入参3：period 用于表示要获取的周期，枚举取值如下： <br>
-- 1m - 1分钟线
-- 5m - 5分钟线
-- 15m - 15分钟线
-- 30m - 30分钟线
-- 1h - 1小时线
-- 1d - 日线
-- 1w - 周线
-- 1mon - 月线
-- 1q - 季度线
-- 1hy - 半年线
-- 1y - 年线
-  参数4：fq 除权方式，用于K线数据复权计算，枚举取值如下： <br>
-- none 不复权
-- front 前复权
-- back 后复权
-- front_ratio 等比前复权
-- back_ratio 等比后复权
-  <br>参数5：时间范围，用于指定数据请求范围，表示的范围是[startDate , endDate]区间（包含前后边界）。 <br>
-  特别说明： <br>
-  period为分钟类型（包括1m、5m、15m、30m、1h），则单次请求时间跨度最大为一月，即endDate - startDate不超过30天。
-  如果需要获取盘中实时行情数据，endDate参数填写当天交易日日期即可。
-- startDate - 起始时间，日期格式：2025-03-25
-- endDate- 结束时间，日期格式：2025-03-25
+### 通用说明
 
-  历史数据说明： <br>
-  分钟级别数据：2024年4月-至今 <br>
-  日线级别数据：公司上市-至今 <br>
+- **请求方式**：所有HTTP API均支持GET和POST方法
+- **认证方式**：所有接口都需要Token认证
+- **返回格式**：JSON格式
+- **日期格式**：`YYYY-MM-DD`，如 `2024-01-01`
+- **标的类型(type)**：
+  - `1` - 沪深京A股
+  - `2` - 沪深指数
+  - `3` - 港股
+  - `4` - ETF基金
+  - `5` - 沪深可转债
+- **复权类型(fq)**：
+  - `1` - 不复权
+  - `2` - 前复权
+  - `3` - 后复权
+  - `4` - 等比前复权
+  - `5` - 等比后复权
 
-  入参6：token 登录XTick网站，注册获取<br>
-  注意：如果需要盘后获取当天全市场股票日线数据，将code设置为all，startDate和endDate日期设置为当前交易日，调用接口接口。
+---
 
-2.3 财务数据接口 <br>
+### 1️⃣ 行情数据接口 (Market Data APIs)
 
-在GitHub上，已实现Java版本和Python版本的代码，请先下载代码直接调用。 <br>
+#### 1.1 股票列表
 
-1. 请求方法：
-   请求地址：http://api.xtick.top/doc/financial?type=1&code=000001&report=Pershareindex&startDate=2020-03-25&endDate=2025-03-25&token=043fbdcba7f3f3ab332ffff123456789
-   入参1：type 股票类别<br>
-   沪深京A股type=1，港股type=3;<br>
-   入参2：code 股票代码<br>
-   比如平安银行为000001<br>
+**接口地址**：`/doc/stockinfo`
 
-   入参3：report 用于表示要获取的财务报表，枚举取值如下： <br>
-- Balance - 资产负债表，数据范围：公司上市-至今
-- Income - 利润表，数据范围：公司上市-至今
-- CashFlow - 现金流量表，数据范围：1997年-至今
-- Capital - 股本表，数据范围：公司上市-至今
-- Holdernum - 股东数，数据范围：2001年-至今
-- Top10holder - 十大股东，数据范围：公司上市-至今
-- Top10flowholder - 十大流通股东，数据范围：2004年-至今
-- Pershareindex - 每股指标，数据范围：2007年-至今<br>
-  参数4：时间范围，用于指定数据请求范围，表示的范围是[startDate , endDate]区间（包含前后边界）。<br>
-- startDate - 起始时间，日期格式：2025-03-25
-- endDate- 结束时间，日期格式：2025-04-25 <br>
-  入参5：token 登录XTick网站，注册获取 <br>
+**功能描述**：获取股票列表，包括沪深京A股、港股、指数、ETF、可转债等。
 
-2.4 金融指标接口
+**请求示例**：
+```bash
+GET http://api.xtick.top/doc/stockinfo?symbol=all&token=YOUR_TOKEN
+```
 
-1、金融指标API接口文档<br>
-所有指标接口的清单，请点击访问：金融指标API文档    http://www.xtick.top/indicator <br>
+**请求参数**：
 
-2、通用参数
-如以下参数，请参考行情数据接口中的定义。<br>
+| 参数名 | 类型 | 必填 | 说明 |
+|--------|------|------|------|
+| symbol | String | 是 | all-全部, sz-深交所, sh-上交所, bj-北交所, hk-港交所, index-指数, bond-可转债, cyb-创业板, kcb-科创板, etf-ETF, st-ST股票, ts-退市股票 |
+| token | String | 是 | API Token |
 
-- type：股票类别。
-- code：股票代码。
-- period：k线周期。
-- fq：除权方式。
-- startDate：起始时间。
-- endDate：结束时间。
-- token：令牌
-  3、扩展参数<br>
-  参数名：scale<br>
-  默认值为3，取值范围[1-10]，取值含义：数值代表返回值的精度（保留几位小数位）。<br>
-  参数名：round<br>
-  默认值为1，取值范围[0-7]，取值含义：<br>
--   0 ROUND_UP模式，四舍五入
--   1 ROUND_DOWN模式，截断
--   2 ROUND_CEILING模式
--   3 ROUND_FLOOR模式
--   4 ROUND_HALF_UP模式
--   5 ROUND_HALF_DOWN模式
--   6 ROUND_HALF_EVEN模式
--   7 ROUND_UNNECESSARY模式
-  可参考说明 BigDecimal精确的数值计算
+**返回字段**：type(标的类别), code(股票代码), name(股票名称)
 
-  4、金融指标验证 <br>
-  尽最大可能，将尽可能多的金融指标数据进行验证，也欢迎大家参与验证。 <br>
-1. 量化指标之KDJ公式验证-CSDN博客 <br>
-2. 量化指标之MACD公式验证-CSDN博客 <br>
+#### 1.2 交易日历
 
-2.5 盯盘数据接口
-2.5.1 竞价数据-实时接口 <br>
-获取沪深京股票交易日盘中实时竞价数据，竞价时间段：9:15-9:25。每次调用接口返回最新竞价数据。 <br>
+**接口地址**：`/doc/calendar`
 
-1. 请求方法： <br>
-   请求地址：http://api.xtick.top/doc/bid/time?type=1&code=000001&token=043fbdcba7f3f3ab332ffff123456789
-   入参1：type 股票类别 <br>
-   这里目前只支持沪深京A股的竞价数据，type设置为1。 <br>
-   入参2：code 股票代码 <br>
-   比如平安银行为000001。 <br>
-   这里支持批量参数 <br>
-   a、code取值为000001，表示获取股票000001的竞价数据。 <br>
-   b、code取值为000001,000002,600000，表示获取这三个票的竞价数据，多个票直接用英文逗号分割，最多50个股票。 <br>
-   a、code取值为all，表示获取全市场股票的竞价数据。 <br>
-   入参3：token 登录XTick网站，注册获取。 <br>
-   入参4：option 可选参数，为json字符串。如果不需要过滤和排序功能，可以忽略该参数 <br>
-   String filter; //定义筛选条件 <br>
-   String sort; //定义排序字段 <br>
-   int asc; //定义排序方式 0:降序 1:升序 <br>
-   int limit = 10000;//定义截取长度 <br>
-   比如常见的两种场景： <br>
-   场景一：当天全市场股票竞价，按未成交额排序，从大到小，取前100条。 <br>
-   {"sort":"noe","asc":0,"limit":100} <br>
-   场景二：当天全市场股票竞价，过滤出来当天竞价涨幅5个点以上且竞价额大于等于1000万的个股，结果数据按未成交额排序，从大到小，取前100条。 <br>
-   {"filter":"jjzf>5;jje>=10000000","sort":"noe","asc":0,"limit":100} <br>
+**功能描述**：获取A股交易日历，包含交易所和个股交易日历（2020年至今）。
 
-2.5.2 竞价数据-历史接口
+**请求参数**：code(股票代码/all/ssb), startDate, endDate, token
 
-1. 请求方法： <br>
-   请求地址：http://api.xtick.top/doc/bid/history?type=1&code=000001&startDate=2025-03-25&endDate=2026-03-25&token=043fbdcba7f3f3ab332ffff123456789
-   <br>入参1：type 股票类别 <br>
-   这里目前只支持沪深京A股的竞价数据，type设置为1。 <br>
-   入参2：code 股票代码 <br>
-   比如平安银行为000001 <br>
-   这里支持以下批量参数 <br>
-   a、code取值为000001，表示获取股票000001的竞价数据。注意这里不支持多个股票 <br>
-   b、code取值为all，startDate和endDate必须是同一天，表示获取某个交易日内的全市场股票的竞价数据。 <br>
-   <br> 参数3：时间范围，用于指定数据请求范围，表示的范围是[startDate , endDate]区间（包含前后边界）。、竞价历史数据范围：2025年11月-至今
-   特别说明： <br>
+**返回字段**：code, time(交易日期), status(1-正常交易, 2-休市), preTime(上一交易日)
 
-- startDate - 起始时间，日期格式：2025-03-25 <br>
-- endDate- 结束时间，日期格式：2025-03-25 <br>
-  入参4：token 登录XTick网站，注册获取 <br>
+#### 1.3 分钟数据-实时接口
 
-2.5.3 竞价数据-详情接口
+**接口地址**：`/doc/kline/minute`
 
-1. 请求方法： <br>
-   请求地址：http://api.xtick.top/doc/bid/detail?type=1&code=000001&tradeDate=2025-03-25&token=043fbdcba7f3f3ab332ffff123456789
-   <br>入参1：type 股票类别 <br>
-   这里目前只支持沪深京A股的竞价数据，type设置为1。 <br>
-   入参2：code 股票代码 <br>
-   比如平安银行为000001，不支持批量参数。 <br>
-   参数3：tradeDate 交易日期，日期格式：2025-10-28。 <br>
-   竞价详细历史数据范围：2025年4月-至今，只能通过接口调用最近半年数据。 <br>
-   入参4：token 登录XTick网站，注册获取 <br>
+**功能描述**：获取日内一分钟实时数据。
 
-2.5.4 Tick数据-实时接口
+**请求参数**：type, code(单个股票), fq, token
 
-1. 请求方法： <br>
-   请求地址：http://api.xtick.top/doc/tick/time?type=1&code=000001&period=tick&token=043fbdcba7f3f3ab332ffff123456789
-   <br>入参1：type 股票类别 <br>
-   这里目前只支持沪深京A股的Tick数据，type设置为1。 <br>
-   入参2：code 股票代码 <br>
-   比如平安银行为000001。 <br>
-   这里支持批量参数 <br>
-   a、code取值为000001，表示获取股票000001的竞价数据。 <br>
-   b、code取值为000001,000002,600000，表示获取这三个票的竞价数据，多个票直接用英文逗号分割，最多50个股票。 <br>
-   a、code取值为all，表示获取全市场股票的竞价数据。 <br>
-  入参3：period 用于表示要获取的周期，枚举取值如下： <br>
-- tick - tick数据 <br>
-- 1d - 日线数据 <br>
-  入参4：token 登录XTick网站，注册获取 <br>
+**返回字段**：type, code, time, open, close, high, low, volume, amount, preClose
 
-2.5.5 Tick数据-历史接口
+#### 1.4 行情数据-通用接口
 
-1. 请求方法： <br>
-   请求地址：http://api.xtick.top/doc/tick/history?type=1&code=000001&tradeDate=2025-10-25&token=043fbdcba7f3f3ab332ffff123456789
-   <br>入参1：type 股票类别 <br>
-   这里目前只支持沪深京A股的竞价数据，type设置为1。 <br>
-   入参2：code 股票代码 <br>
-   比如平安银行为000001，不支持批量参数。 <br>
-   参数3：tradeDate 交易日期，日期格式：2025-10-28。 <br>
-   Tick历史数据范围：2025年2月-至今，只能通过接口调用最近半年数据。 <br>
-   入参4：token 登录XTick网站，注册获取 <br>
+**接口地址**：`/doc/kline/market`
 
+**功能描述**：获取多周期K线数据（1m/5m/15m/30m/1h/1d/1w/1mon/1q/1y），支持复权。
 
+**请求参数**：type, code(单个股票), fq, period, startDate, endDate, token
 
-2.6 量化指标接口<br>
-2.6.1 量化指标-实时接口<br>
-获取沪深京股票交易日盘中实时指标数据，包括涨速、换手率、市盈率、市净率等。支持数据全推。<br>
-1. 请求方法<br>
-   请求地址：http://api.xtick.top/doc/quant/data?type=1&token=e32341ef236299b3e8fd14123456789&field=x001,x002,x003,x004,x005,x006,x007,x008,x009,x010<br>
-   入参1：type 股票类别<br>
-   这里目前只支持沪深京A股的竞价数据，type设置为1。<br>
-   入参2：field 需要返回字段<br>
-   多个字段之间用英文逗号分割，单次请求不超过10个字段。<br>
-   入参3：token 登录XTick网站，注册获取。<br>
-2. 字段定义<br>
-   'x001'                #昨收价<br>
-   'x002'                #最新价<br>
-   'x003'                #开盘价<br>
-   'x004'                #最高价<br>
-   'x005'                #最低价<br>
-   'x006'                #成交量<br>
-   'x007'                #成交额<br>
-   'x008'                #涨跌<br>
-   'x009'                #振幅<br>
-   'x010'                #均价<br>
-   'x011'                #现均差<br>
-   'x012'                #涨停价<br>
-   'x013'                #跌停价<br>
-   'x014'                #涨停板 -1为跌停板，1为涨停板<br>
-   'x015'                #涨速<br>
-   'x016'                #1分钟涨速<br>
-   'x017'                #2分钟涨速<br>
-   'x018'                #3分钟涨速<br>
-   'x019'                #4分钟涨速<br>
-   'x020'                #5分钟涨速<br>
-   'x021'                #静态市盈率<br>
-   'x022'                #动态市盈率<br>
-   'x023'                #TTM市盈率<br>
-   'x024'                #总市值<br>
-   'x025'                #流通市值<br>
-   'x026'                #市净率<br>
-   'x027'                #换手率<br>
-   'x028'                #实际换手率<br>
-   'x029'                #涨幅<br>
-   'x030'                #5日涨幅<br>
-   'x031'                #10日涨幅<br>
-   'x032'                #20日涨幅<br>
-   'x033'                #5日均线<br>
-   'x034'                #10日均线<br>
-   'x035'                #20日均线<br>
-   'x036'                #30日均线<br>
-   'x037'                #60日均线<br>
-   'x038'                #120日均线<br>
-   'x039'                #MACD-DIF<br>
-   'x040'                #MACD-DEA<br>
-   'x041'                #MACD-MACD<br>
-   'x042'                #KDJ-K<br>
-   'x043'                #KDJ-D<br>
-   'x044'                #KDJ-J<br>
-   'x045'                #RSI<br>
-   'x046'                #WR<br>
-   'x047'                #CCI<br>
+**注意事项**：
+- 分钟数据单次请求时间跨度不超过31天
+- 支持code=all获取全市场数据（仅最近一个月）
 
-2.7 其它接口<br>
+#### 1.5 股东数
 
-2.7.1 股票列表 <br>
+**接口地址**：`/doc/holdernum`
 
-获取所有股票代码，包括沪深京A股、港股、沪深指数、ETF几类数据。 <br>
+**功能描述**：获取股东户数数据（2001年至今）。
 
-1. 请求方法： <br>
-   请求地址：http://api.xtick.top/doc/codes?token=043fbdcba7f3f3ab332ffff123456789 <br>
-   备注：返回数据实例 1-000001 代表 type-code <br>
-   沪深京A股type=1，港股type=3，沪深指数type=10，沪深ETF type=20; <br>
+**请求参数**：code(单个股票), startDate, endDate, token
 
-   入参1：token 登录XTick网站，注册获取。 <br>
+#### 1.6 财务指标
 
-2.7.2 交易日历 <br>
+**接口地址**：`/doc/core`
 
-获取A股历史交易，包含交易所交易日历和个股交易日历。
-交易所是指上交所、深交所、北交所的交易日历。
+**功能描述**：获取财务指标数据（2007年至今）。
 
-1. 请求方法<br>
-   请求地址：http://api.xtick.top/doc/calendar?code=000001&startDate=2025-03-25&endDate=2026-03-25&token=043fbdcba7f3f3ab332ffff123456789<br>
-   入参1：code 股票代码<br>
-   比如平安银行为000001，若是查询交易所交易日历，则code为ssb，代表上交所、深交所、北交所。<br>
-   code取值为all，startDate和endDate必须是同一天，表示获取某个交易日内的全市场股票的交易日历。<br>
-   参数2：时间范围，用于指定数据请求范围，表示的范围是[startDate , endDate]区间（包含前后边界）。<br>
-   特别说明：<br>
-- startDate - 起始时间，日期格式：2025-03-25<br>
-- endDate- 结束时间，日期格式：2025-03-25<br>
-  入参3：token 登录XTick网站，注册获取<br>
+**返回字段**：ocfps(每股经营现金流), bps(每股净资产), eps(每股收益), roe(净资产收益率)等22个字段
 
-## 项目地址
+#### 1.7 十大股东
 
-目前项目托管在 Gitee 和 Github 平台上中，欢迎大家 Star 和 Fork 支持~ <br>
+**接口地址**：`/doc/topholder`
 
-## 小龙虾投喂文档
-1、直接给AI投喂MD文档： <br>
-接口文档路径：/doc/references下 <br>
+**功能描述**：获取十大股东数据（公司上市至今）。
 
-2、XTick的最新skills开源项目 <br>
-https://gitee.com/xtick/skills <br>
-https://github.com/xticktop/skills <br>
+#### 1.8 十大流通股东
 
-### Java SDK :
+**接口地址**：`/doc/topflowholder`
 
-Gitee地址：https://github.com/xticktop/xtick <br>
-Github地址：https://github.com/xticktop/xtick <br>
+**功能描述**：获取十大流通股东数据（2004年至今）。
 
-## 关注&交流
+---
 
-为了方便小伙伴们沟通交流，创建了QQ群 (加群备注：XTick)
-，目前项目还存在很多不足之处，欢迎各位大佬进群进行交流，为了防止广告进入，希望加群的时候能添加备注，谢谢~<br>
-如遇问题联系作者，邮箱：xticktop@163.com <br>
-[网站说明文档](https://ccn9lag3l54q.feishu.cn/wiki/ABenwEvDOiShYrkaLAJcFY5gnZf)<br>
-**注意**: 本项目仅供学习和研究使用，请勿用于商业用途。使用时请遵守XTick的使用条款。
+### 2️⃣ 盯盘数据接口 (Watch Data APIs)
 
+#### 2.1 龙虎榜-历史数据
 
+**接口地址**：`/doc/order/longhubang`
 
+**功能描述**：获取龙虎榜详情历史数据，盘后更新。
 
+**请求参数**：tradeDate, token
 
+**返回字段**：code, time, explanation(上榜原因), name, close, zdf(涨跌幅), netamt(净买额), buyamt, sellamt等
+
+#### 2.2 日K线-实时数据
+
+**接口地址**：`/doc/order/day`
+
+**功能描述**：获取盘中实时日K线数据，支持批量和全推。
+
+**请求参数**：type, code(支持单个/批量最多50个/all), token
+
+#### 2.3 分钟K线-实时数据
+
+**接口地址**：`/doc/order/minute`
+
+**功能描述**：获取盘中分钟K线实时数据，支持批量和全推。
+
+#### 2.4 买卖五档-实时数据
+
+**接口地址**：`/doc/order/five`
+
+**功能描述**：获取盘中买卖五档盘口实时数据（Tick数据）。
+
+**返回字段**：lastPrice, open, high, low, bp1-bp5(买一至买五价), bv1-bv5(买量), sp1-sp5(卖价), sv1-sv5(卖量)等
+
+#### 2.5 买卖五档-历史数据
+
+**接口地址**：`/doc/order/history`
+
+**功能描述**：获取盘中买卖五档历史数据，盘后更新。
+
+**请求参数**：type, code(单个股票), tradeDate, token
+
+#### 2.6 成交统计
+
+**接口地址**：`/doc/order/amount`
+
+**功能描述**：按交易日获取全市场成交额统计。
+
+---
+
+### 3️⃣ 核心数据接口 (Core Data APIs)
+
+#### 3.1 竞价数据-实时接口
+
+**接口地址**：`/doc/core/bidtime`
+
+**功能描述**：获取交易日盘中实时竞价数据（9:15-9:25）。
+
+**请求参数**：type, code(支持单个/批量/all), token
+
+#### 3.2 核心指标-实时接口
+
+**接口地址**：`/doc/core/time`
+
+**功能描述**：获取盘中实时指标数据（涨速、换手率、市盈率、市净率等）。
+
+**请求参数**：type, code(单个股票), field(多个字段用逗号分隔，最多10个), token
+
+#### 3.3 除权变更数据
+
+**接口地址**：`/doc/core/chuquan`
+
+**功能描述**：获取股票除权除息历史数据，盘后更新。
+
+**请求参数**：type, code(单个/all), startDate, endDate, token
+
+#### 3.4 停牌数据
+
+**接口地址**：`/doc/core/tingpai`
+
+**功能描述**：获取停牌股票历史数据，盘后更新。
+
+#### 3.5 ST数据
+
+**接口地址**：`/doc/core/st`
+
+**功能描述**：获取ST股票历史数据（2022年3月至今），盘后更新。
+
+#### 3.6 涨跌停价格
+
+**接口地址**：`/doc/core/price`
+
+**功能描述**：获取股票涨跌停历史数据，盘后更新。
+
+**请求参数**：type, code, fq(复权类型), startDate, endDate, token
+
+#### 3.7 分笔数据
+
+**接口地址**：`/doc/core/fenbi`
+
+**功能描述**：获取股票分时成交数据。
+
+**请求参数**：type, code(单个股票), tradeDate, token
+
+#### 3.8 分价数据
+
+**接口地址**：`/doc/core/fenjia`
+
+**功能描述**：获取股票分价成交数据，盘后更新。
+
+---
+
+### 4️⃣ 短线热点接口 (Hot Spot APIs)
+
+#### 4.1 连板天梯-实时接口
+
+**接口地址**：`/doc/hot/board`
+
+**功能描述**：获取涨停板、跌停板、炸板数据。
+
+**请求参数**：type, flag(1-涨停, 2-跌停, 3-炸板), tradeDate, token
+
+#### 4.2 市场情绪-实时接口
+
+**接口地址**：`/doc/hot/emotion`
+
+**功能描述**：获取市场情绪数据，短线选手复盘必备工具。
+
+#### 4.3 资金流向-实时接口
+
+**接口地址**：`/doc/hot/money`
+
+**功能描述**：获取资金流数据，盘中实时更新。
+
+**请求参数**：type, code(单个/all), startDate, endDate, token
+
+#### 4.4 竞价数据-历史接口
+
+**接口地址**：`/doc/hot/bidhistory`
+
+**功能描述**：获取竞价历史数据，仅保留集合竞价最后一条数据和开盘数据。
+
+**请求参数**：type, code, seq(0-9:25数据, 1-倒数第二条), startDate, endDate, token
+
+#### 4.5 竞价详情-实时接口
+
+**接口地址**：`/doc/hot/biddetail`
+
+**功能描述**：获取开盘集合竞价阶段个股的所有竞价信息，9:25更新。
+
+#### 4.6 新闻资讯-实时接口
+
+**接口地址**：`/doc/hot/news`
+
+**功能描述**：获取财联社、新浪财经、格隆汇、华尔街见闻等主流金融平台资讯。
+
+**请求参数**：minutes(>0获取最近分钟数, =0按tradeDate获取历史), tradeDate, token
+
+#### 4.7 日内分时-实时接口
+
+**接口地址**：`/doc/hot/timekline`
+
+**功能描述**：获取股票盘中日内分时数据。
+
+#### 4.8 概念板块成分股数据
+
+**接口地址**：`/doc/hot/bk`
+
+**功能描述**：获取概念板块、地域板块、行业板块及成分股数据。
+
+**请求参数**：symbol(sw1/sw2/sw3申万行业, zjh1/zjh2证监会行业, bdy1/bdy2地域, ahy行业, afg风格, agn/bgn/cgn概念), token
+
+#### 4.9 股票关联概念板块数据
+
+**接口地址**：`/doc/hot/gainian`
+
+**功能描述**：获取个股关联的概念板块、地域板块、行业板块数据。
+
+#### 4.10 增量更新
+
+**接口地址**：`/doc/hot/dayupdate`
+
+**功能描述**：提供交易日当天全市场增量数据（收盘后历史数据）。
+
+**请求参数**：dataType(bid-竞价详情, 1m-1分钟数据), symbol(index/etf/cyb/kcb/bj/szm/shm), tradeDate, token
+
+**注意**：该接口数据量大，严格限流，请勿频繁调用。
+
+---
+
+### 5️⃣ 量化因子接口 (Quant Factor APIs)
+
+#### 5.1 量化因子-实时接口
+
+**接口地址**：`/doc/quant/data`
+
+**功能描述**：获取盘中实时因子指标数据，支持全推。
+
+**请求参数**：type, field(all或指定字段，最多10个), token
+
+**常用字段**：
+- x001-x005: 昨收价、最新价、开盘价、最高价、最低价
+- x006-x007: 成交量、成交额
+- x015: 涨速, x016-x020: 1-5分钟涨速
+- x021-x023: 静态/动态/TTM市盈率
+- x024-x025: 总市值、流通市值
+- x026-x028: 市净率、换手率、实际换手率
+- x033-x038: 5/10/20/30/60/120日均线
+- x039-x041: MACD-DIF/DEA/MACD
+- x042-x044: KDJ-K/D/J
+- x045-x047: RSI、WR、CCI
+
+#### 5.2 量化因子-历史接口
+
+**接口地址**：`/doc/quant/history`
+
+**功能描述**：获取盘中因子指标历史数据，盘后更新。
+
+**请求参数**：tradeDate, token
+
+---
+
+### 6️⃣ 金融指标接口 (Indicator APIs)
+
+提供51+技术指标计算，每个指标对应独立API端点。
+
+**主要指标**：
+- **趋势指标**：AD(累积/分布线), MACD(平滑异同移动平均线), SMA(简单移动平均), EMA(指数移动平均)
+- **震荡指标**：RSI(相对强弱指数), KDJ(随机指标), WR(威廉指标), CCI(顺势指标)
+- **成交量指标**：OBV(能量潮), MFI(资金流量指标)
+- **波动指标**：ATR(真实波幅), BOLL(布林带)
+- **其他指标**：WMA(加权移动平均), SAR(抛物线转向)等
+
+**通用参数**：type, code, period, fq, startDate, endDate, inReal, optInFastPeriod, optInSlowPeriod, optInSignalPeriod, token
+
+**详细文档**：[http://www.xtick.top/indicator](http://www.xtick.top/indicator)
+
+---
+
+### 7️⃣ WebSocket接口
+
+#### 7.1 查询订阅
+
+**接口地址**：`/doc/querysubscribe`
+
+**功能描述**：查询当前订阅状态。
+
+**请求参数**：token
+
+#### 7.2 取消订阅
+
+**接口地址**：`/doc/unsubscribe`
+
+**功能描述**：取消数据订阅。
+
+**请求参数**：token
+
+**WebSocket订阅说明**：
+- 支持按交易所订阅（上交所、深交所、北交所、港交所）
+- 支持按个股订阅（最多50个）
+- 数据实时推送，建议异步处理
+- 参考GitHub上的XTickWebSocketClient实现
+
+---
+
+## 🚀 Python SDK使用指南
+
+本项目提供了完整的Python API调用示例，位于 `xtick/code/api/` 目录。
+
+### 项目结构
+
+```
+xtick/code/
+├── api/
+│   ├── XTickBaseApi.py        # 基础数据接口（8个接口）
+│   ├── XTickMarketApi.py      # 行情数据接口（8个接口）
+│   ├── XTickWatchApi.py       # 盯盘数据接口（7个接口）
+│   ├── XTickCoreApi.py        # 核心数据接口（8个接口）
+│   ├── XTickHotApi.py         # 短线热点接口（10个接口）
+│   ├── XTickQuantApi.py       # 量化因子接口（2个接口）
+│   ├── XTickIndicatorApi.py   # 金融指标接口（51+个指标）
+│   └── XTickWebSocketApi.py   # WebSocket接口（2个接口）
+├── XTickStockApiClient.py     # 完整测试客户端
+├── Config.py                  # 配置文件
+└── util/
+    ├── XTickUtil.py           # 工具类
+    └── DataConvert.py         # 数据转换
+```
+
+### 快速开始
+
+#### 1. 安装依赖
+
+```bash
+pip install -r requirements.txt
+```
+
+#### 2. 配置Token
+
+编辑 `xtick/code/Config.py`：
+
+```python
+TOKEN = "your_token_here"  # 从 http://www.xtick.top/ 获取
+SERVER_URL = "http://api.xtick.top"
+```
+
+#### 3. 调用API示例
+
+```python
+from xtick.code.api.XTickMarketApi import getKlineMarket
+from xtick.code.Config import Config
+import json
+
+# 获取平安银行日K线数据
+result = getKlineMarket(
+    type=1,              # 沪深京A股
+    code="000001",       # 股票代码
+    fq=1,                # 不复权
+    period="1d",         # 日线
+    startDate="2024-01-01",
+    endDate="2024-12-31",
+    token=Config.TOKEN
+)
+
+data = json.loads(result)
+print(f"获取到 {len(data)} 条K线数据")
+```
+
+#### 4. 运行完整测试
+
+```bash
+# 运行所有接口测试
+python xtick/code/XTickStockApiClient.py
+
+# 或单独测试某个模块
+python -c "from xtick.code.XTickStockApiClient import XTickStockApiClient; \
+           client = XTickStockApiClient(); \
+           client.demoForMarketApi()"
+```
+
+### 完整测试客户端
+
+`XTickStockApiClient.py` 提供了所有接口的完整测试用例：
+
+```python
+from xtick.code.XTickStockApiClient import XTickStockApiClient
+
+client = XTickStockApiClient()
+
+# 按需选择要测试的接口
+client.demoForMarketApi()       # 行情数据接口（8个）
+client.demoForWatchApi()        # 盯盘数据接口（7个）
+client.demoForCoreApi()         # 核心数据接口（8个）
+client.demoForHotApi()          # 短线热点接口（10个）
+client.demoForQuantApi()        # 量化因子接口（2个）
+client.demoForIndicatorApi()    # 金融指标接口（示例）
+client.demoForWebSocketApi()    # WebSocket接口（2个）
+
+# 或运行所有测试（注意：会调用大量API）
+client.allDemo()
+```
+
+---
+
+## 📝 使用示例
+
+### HTTP请求示例
+
+```bash
+# 获取股票列表
+curl "http://api.xtick.top/doc/stockinfo?symbol=index&token=YOUR_TOKEN"
+
+# 获取K线数据
+curl "http://api.xtick.top/doc/kline/market?type=1&code=000001&fq=1&period=1d&startDate=2024-01-01&endDate=2024-12-31&token=YOUR_TOKEN"
+
+# 获取实时买卖五档
+curl "http://api.xtick.top/doc/order/five?type=1&code=000001&token=YOUR_TOKEN"
+```
+
+### Python调用示例
+
+```python
+import requests
+import json
+import pandas as pd
+
+TOKEN = "YOUR_TOKEN"
+BASE_URL = "http://api.xtick.top"
+
+def get_kline_data(code, period="1d", start_date="2024-01-01", end_date="2024-12-31"):
+    """获取K线数据"""
+    url = f"{BASE_URL}/doc/kline/market"
+    params = {
+        "type": 1,
+        "code": code,
+        "fq": 1,
+        "period": period,
+        "startDate": start_date,
+        "endDate": end_date,
+        "token": TOKEN
+    }
+    response = requests.get(url, params=params)
+    data = json.loads(response.text)
+    return pd.DataFrame(data)
+
+# 使用示例
+df = get_kline_data("000001")
+print(df.head())
+print(f"数据条数: {len(df)}")
+```
+
+更多示例请参考 `xtick/code/XTickStockApiClient.py`
+
+---
+
+## ⚠️ 注意事项
+
+### API调用限制
+
+1. **频率限制**：请合理控制API调用频率，避免频繁请求
+2. **批量限制**：批量查询时单次最多50个股票代码
+3. **时间跨度**：分钟数据单次请求时间跨度不超过31天
+4. **全推数据**：使用`code=all`参数时请注意数据量较大
+5. **增量更新接口**：严格限流，请勿频繁调用
+
+### 数据准确性
+
+1. 实时数据可能存在秒级延迟
+2. 财务数据以公司公告为准
+3. 复权数据仅供参考，实际交易请以券商数据为准
+
+### Token安全
+
+1. 请勿将Token泄露给他人
+2. 建议定期更换Token
+3. 不要在公开代码中硬编码Token
+
+---
+
+## 🔗 相关链接
+
+- **官方网站**：[http://www.xtick.top/](http://www.xtick.top/)
+- **API文档**：[飞书文档](https://ccn9lag3l54q.feishu.cn/wiki/ABenwEvDOiShYrkaLAJcFY5gnZf)
+- **金融指标API**：[http://www.xtick.top/indicator](http://www.xtick.top/indicator)
+- **GitHub**：[https://github.com/xticktop/xtick](https://github.com/xticktop/xtick)
+- **Gitee**：[https://gitee.com/xtick/xtick](https://gitee.com/xtick/xtick)
+- **Skills项目**：[https://github.com/xticktop/skills](https://github.com/xticktop/skills)
+
+---
+
+## 👥 交流与支持
+
+### QQ交流群
+
+欢迎加入QQ群进行交流（加群备注：**XTick**）
+
+<img src="./doc/images/qqGroup.png" alt="QQ群" width="300">
+
+### 联系方式
+
+- **邮箱**：xticktop@163.com
+- **问题反馈**：通过GitHub Issues提交
+
+---
+
+## 📄 许可证
+
+本项目采用 MIT 许可证 - 查看 LICENSE 文件了解详情
+
+---
+
+## 🙏 致谢
+
+感谢所有为本项目做出贡献的开发者和用户！
+
+您的支持是我们继续维护项目的动力，欢迎Star和Fork！
+
+---
+
+**免责声明**：本项目仅供学习和研究使用，请勿用于商业用途。平台提供的数据仅供参考，不构成投资建议。投资有风险，入市需谨慎。
