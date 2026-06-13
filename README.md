@@ -45,27 +45,174 @@ XTick是一个专业的金融行情数据API服务平台，为量化交易、投
 
 ## 📊 数据覆盖范围
 
-| 数据类别 | 数据细分 | 更新方式 | 历史数据范围 |
-|---------|---------|---------|-------------|
-| **Tick数据** | Tick实时数据 | 实时更新 | A股、ETF：2025年2月至今 |
-| | Tick历史数据 | 盘后更新 | 指数和北证：2025年10月至今 |
-| **竞价数据** | 竞价实时数据 | 实时更新 | 竞价历史：2025年7月至今 |
-| | 竞价历史数据 | 9:25分更新 | 竞价详情：2025年2月至今 |
-| **分钟数据** | 1分钟实时数据 | 实时更新 | 2024年4月至今 |
-| | 其它周期K线 | 按分钟频率更新 | 支持复权 |
-| **日线数据** | 日线实时数据 | 实时更新 | 公司上市至今 |
-| | 日线历史数据 | 15:05更新 | 支持复权 |
-| **量化数据** | 量化因子实时 | 实时更新 | 2008年1月至今 |
-| | 量化因子历史 | 15:05更新 | - |
-| **财务数据** | 财务报表 | 盘后更新 | 2008年1月至今 |
-| **技术指标** | 分钟级指标 | 实时更新 | 2024年4月至今 |
-| | 日线级指标 | 15:05更新 | 公司上市至今 |
+## 已接入数据预览
+
+<p><strong>接入数据预览</strong></p>
+<table style="width:89%;">
+<colgroup>
+<col style="width: 9%" />
+<col style="width: 13%" />
+<col style="width: 14%" />
+<col style="width: 11%" />
+<col style="width: 13%" />
+<col style="width: 26%" />
+</colgroup>
+<tbody>
+<tr>
+<td style="text-align: left;">数据类别</td>
+<td style="text-align: left;">数据细分</td>
+<td style="text-align: left;">更新方式</td>
+<td style="text-align: left;">数据全推</td>
+<td style="text-align: left;">获取方式</td>
+<td style="text-align: left;">历史数据范围</td>
+</tr>
+<tr>
+<td rowspan="2" style="text-align: center;">tick数据</td>
+<td style="text-align: left;">tick实时数据</td>
+<td style="text-align: left;">实时更新</td>
+<td style="text-align: left;">数据全推</td>
+<td style="text-align: left;">api调用</td>
+<td rowspan="2" style="text-align: left;"><p>指数和北证：2025年10月-至今</p>
+<p>A股、ETF：2025年2月-至今</p></td>
+</tr>
+<tr>
+<td style="text-align: left;">tick历史数据</td>
+<td style="text-align: left;">盘后更新</td>
+<td style="text-align: left;">按个股获取</td>
+<td style="text-align: left;">api调用</td>
+</tr>
+<tr>
+<td rowspan="3" style="text-align: center;">竞价数据</td>
+<td style="text-align: left;">竞价实时数据</td>
+<td style="text-align: left;">实时更新</td>
+<td style="text-align: left;">数据全推</td>
+<td style="text-align: left;">api调用</td>
+<td rowspan="3" style="text-align: left;"><p>竞价历史：2025年7月-至今</p>
+<p>竞价历史详情：2025年2月-至今</p></td>
+</tr>
+<tr>
+<td style="text-align: left;">竞价历史数据</td>
+<td style="text-align: left;">9:25分更新</td>
+<td style="text-align: left;">数据全推</td>
+<td style="text-align: left;">api调用</td>
+</tr>
+<tr>
+<td style="text-align: left;">竞价历史详情数据</td>
+<td style="text-align: left;">9:25分更新</td>
+<td style="text-align: left;">按个股获取</td>
+<td style="text-align: left;">api调用</td>
+</tr>
+<tr>
+<td rowspan="3" style="text-align: center;">分钟数据</td>
+<td style="text-align: left;">1分钟实时数据</td>
+<td style="text-align: left;">实时更新</td>
+<td style="text-align: left;">数据全推</td>
+<td style="text-align: left;">api调用</td>
+<td rowspan="3" style="text-align: left;"><p>分钟级别数据：2024年4月-至今</p>
+<p>所有分钟周期数据，均支持复权</p></td>
+</tr>
+<tr>
+<td style="text-align: left;">1分钟K线数据</td>
+<td style="text-align: left;">按1分钟频率实时更新</td>
+<td style="text-align: left;">数据全推</td>
+<td style="text-align: left;">api调用</td>
+</tr>
+<tr>
+<td style="text-align: left;">其它分钟K线数据</td>
+<td style="text-align: left;">按1分钟频率实时更新</td>
+<td style="text-align: left;">按个股获取</td>
+<td style="text-align: left;">api调用</td>
+</tr>
+<tr>
+<td rowspan="2" style="text-align: center;">日线数据</td>
+<td style="text-align: left;">日线实时数据</td>
+<td style="text-align: left;">实时更新</td>
+<td style="text-align: left;">数据全推</td>
+<td style="text-align: left;">api调用</td>
+<td rowspan="2" style="text-align: left;"><p>日线级别数据：公司上市-至今</p>
+<p>日线数据支持复权</p></td>
+</tr>
+<tr>
+<td style="text-align: left;">日线历史数据</td>
+<td style="text-align: left;">3:05分更新</td>
+<td style="text-align: left;">数据全推</td>
+<td style="text-align: left;">api调用</td>
+</tr>
+<tr>
+<td rowspan="2" style="text-align: center;">量化数据</td>
+<td style="text-align: left;">量化因子实时数据</td>
+<td style="text-align: left;">实时更新</td>
+<td style="text-align: left;">数据全推</td>
+<td style="text-align: left;">api调用</td>
+<td rowspan="2" style="text-align: left;">2008年1月-至今</td>
+</tr>
+<tr>
+<td style="text-align: left;">量化因子历史数据</td>
+<td style="text-align: left;">3:05分更新</td>
+<td style="text-align: left;">数据全推</td>
+<td style="text-align: left;">api调用</td>
+</tr>
+<tr>
+<td style="text-align: center;">核心指标</td>
+<td style="text-align: left;">核心指标实时数据</td>
+<td style="text-align: left;">实时更新</td>
+<td style="text-align: left;">按个股获取</td>
+<td style="text-align: left;">api调用</td>
+<td style="text-align: left;">参考量化数据</td>
+</tr>
+<tr>
+<td rowspan="2" style="text-align: center;">金融指标</td>
+<td style="text-align: left;">金融指标实时数据</td>
+<td style="text-align: left;">实时更新</td>
+<td style="text-align: left;">按个股获取</td>
+<td style="text-align: left;">api调用</td>
+<td rowspan="2" style="text-align: left;"><p>分钟级别指标：2024年4月-至今</p>
+<p>日线级别指标：公司上市-至今</p></td>
+</tr>
+<tr>
+<td style="text-align: left;">金融指标历史数据</td>
+<td style="text-align: left;">3:05分更新</td>
+<td style="text-align: left;">按个股获取</td>
+<td style="text-align: left;">api调用</td>
+</tr>
+<tr>
+<td style="text-align: center;">财务数据</td>
+<td style="text-align: left;">盘后更新</td>
+<td style="text-align: left;">盘后更新</td>
+<td style="text-align: left;">按个股获取</td>
+<td style="text-align: left;">api调用</td>
+<td style="text-align: left;">2008年1月-至今</td>
+</tr>
+<tr>
+<td rowspan="3" style="text-align: center;">其它数据</td>
+<td style="text-align: left;">交易日历</td>
+<td style="text-align: left;">3:05分更新</td>
+<td style="text-align: left;">按个股获取</td>
+<td style="text-align: left;">api调用</td>
+<td style="text-align: left;">公司上市-至今</td>
+</tr>
+<tr>
+<td style="text-align: left;">股票列表</td>
+<td style="text-align: left;">盘后更新</td>
+<td style="text-align: left;">按个股获取</td>
+<td style="text-align: left;">api调用</td>
+<td style="text-align: left;">每日更新</td>
+</tr>
+<tr>
+<td style="text-align: left;">复权变更数据</td>
+<td style="text-align: left;">盘后更新</td>
+<td style="text-align: left;">按个股获取</td>
+<td style="text-align: left;">api调用</td>
+<td style="text-align: left;">公司上市-至今</td>
+</tr>
+</tbody>
+</table>
 
 ---
 
 ## 📡 API接口文档
 
-XTick平台提供**七大类API接口**，共计**88+个接口**。
+XTick平台提供**六大类API接口**，共计**86+个接口**。
 
 ### 接口分类总览
 
@@ -77,7 +224,6 @@ XTick平台提供**七大类API接口**，共计**88+个接口**。
 | 短线热点接口 | 10个 | 连板天梯、市场情绪、资金流向、新闻、概念板块等 |
 | 量化因子接口 | 2个 | 实时和历史量化因子数据 |
 | 金融指标接口 | 51+个 | MACD、RSI、KDJ等技术指标计算 |
-| WebSocket接口 | 2个 | 订阅查询、取消订阅 |
 
 ### 通用说明
 
@@ -99,6 +245,8 @@ XTick平台提供**七大类API接口**，共计**88+个接口**。
   - `5` - 等比后复权
 
 ---
+
+
 
 ### 1️⃣ 行情数据接口 (Market Data APIs)
 
@@ -423,32 +571,6 @@ GET http://api.xtick.top/doc/stockinfo?symbol=all&token=YOUR_TOKEN
 
 ---
 
-### 7️⃣ WebSocket接口
-
-#### 7.1 查询订阅
-
-**接口地址**：`/doc/querysubscribe`
-
-**功能描述**：查询当前订阅状态。
-
-**请求参数**：token
-
-#### 7.2 取消订阅
-
-**接口地址**：`/doc/unsubscribe`
-
-**功能描述**：取消数据订阅。
-
-**请求参数**：token
-
-**WebSocket订阅说明**：
-- 支持按交易所订阅（上交所、深交所、北交所、港交所）
-- 支持按个股订阅（最多50个）
-- 数据实时推送，建议异步处理
-- 参考GitHub上的XTickWebSocketClient实现
-
----
-
 ## 🚀 Python SDK使用指南
 
 本项目提供了完整的Python API调用示例，位于 `xtick/code/api/` 目录。
@@ -465,7 +587,6 @@ xtick/code/
 │   ├── XTickHotApi.py         # 短线热点接口（10个接口）
 │   ├── XTickQuantApi.py       # 量化因子接口（2个接口）
 │   ├── XTickIndicatorApi.py   # 金融指标接口（51+个指标）
-│   └── XTickWebSocketApi.py   # WebSocket接口（2个接口）
 ├── XTickStockApiClient.py     # 完整测试客户端
 ├── Config.py                  # 配置文件
 └── util/
@@ -540,7 +661,6 @@ client.demoForCoreApi()         # 核心数据接口（8个）
 client.demoForHotApi()          # 短线热点接口（10个）
 client.demoForQuantApi()        # 量化因子接口（2个）
 client.demoForIndicatorApi()    # 金融指标接口（示例）
-client.demoForWebSocketApi()    # WebSocket接口（2个）
 
 # 或运行所有测试（注意：会调用大量API）
 client.allDemo()
