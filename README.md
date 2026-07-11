@@ -134,7 +134,7 @@ XTick是一个专业的金融行情数据API服务平台，为量化交易、投
 </tr>
 <tr>
 <td style="text-align: left;">日线历史数据</td>
-<td style="text-align: left;">3:05分更新</td>
+<td style="text-align: left;">3:35分更新</td>
 <td style="text-align: left;">数据全推</td>
 <td style="text-align: left;">api调用</td>
 </tr>
@@ -148,7 +148,7 @@ XTick是一个专业的金融行情数据API服务平台，为量化交易、投
 </tr>
 <tr>
 <td style="text-align: left;">量化因子历史数据</td>
-<td style="text-align: left;">3:05分更新</td>
+<td style="text-align: left;">3:35分更新</td>
 <td style="text-align: left;">数据全推</td>
 <td style="text-align: left;">api调用</td>
 </tr>
@@ -171,7 +171,7 @@ XTick是一个专业的金融行情数据API服务平台，为量化交易、投
 </tr>
 <tr>
 <td style="text-align: left;">金融指标历史数据</td>
-<td style="text-align: left;">3:05分更新</td>
+<td style="text-align: left;">3:35分更新</td>
 <td style="text-align: left;">按个股获取</td>
 <td style="text-align: left;">api调用</td>
 </tr>
@@ -186,7 +186,7 @@ XTick是一个专业的金融行情数据API服务平台，为量化交易、投
 <tr>
 <td rowspan="3" style="text-align: center;">其它数据</td>
 <td style="text-align: left;">交易日历</td>
-<td style="text-align: left;">3:05分更新</td>
+<td style="text-align: left;">3:35分更新</td>
 <td style="text-align: left;">按个股获取</td>
 <td style="text-align: left;">api调用</td>
 <td style="text-align: left;">公司上市-至今</td>
@@ -312,7 +312,7 @@ GET http://api.xtick.top/doc/stockinfo?symbol=all&token=YOUR_TOKEN
 
 #### 1.6 财务指标
 
-**接口地址**：`/doc/core`
+**接口地址**：`/doc/gaap`
 
 **功能描述**：获取财务指标数据（2007年至今）。
 
@@ -334,17 +334,7 @@ GET http://api.xtick.top/doc/stockinfo?symbol=all&token=YOUR_TOKEN
 
 ### 2️⃣ 盯盘数据接口 (Watch Data APIs)
 
-#### 2.1 龙虎榜-历史数据
-
-**接口地址**：`/doc/order/longhubang`
-
-**功能描述**：获取龙虎榜详情历史数据，盘后更新。
-
-**请求参数**：tradeDate, token
-
-**返回字段**：code, time, explanation(上榜原因), name, close, zdf(涨跌幅), netamt(净买额), buyamt, sellamt等
-
-#### 2.2 日K线-实时数据
+#### 2.1 日K线-实时数据
 
 **接口地址**：`/doc/order/day`
 
@@ -352,21 +342,21 @@ GET http://api.xtick.top/doc/stockinfo?symbol=all&token=YOUR_TOKEN
 
 **请求参数**：type, code(支持单个/批量最多50个/all), token
 
-#### 2.3 分钟K线-实时数据
+#### 2.2 分钟K线-实时数据
 
 **接口地址**：`/doc/order/minute`
 
 **功能描述**：获取盘中分钟K线实时数据，支持批量和全推。
 
-#### 2.4 买卖五档-实时数据
+#### 2.3 深度行情-实时数据
 
-**接口地址**：`/doc/order/five`
+**接口地址**：`/doc/order/deep`
 
 **功能描述**：获取盘中买卖五档盘口实时数据（Tick数据）。
 
 **返回字段**：lastPrice, open, high, low, bp1-bp5(买一至买五价), bv1-bv5(买量), sp1-sp5(卖价), sv1-sv5(卖量)等
 
-#### 2.5 买卖五档-历史数据
+#### 2.4 深度行情-历史数据
 
 **接口地址**：`/doc/order/history`
 
@@ -374,7 +364,7 @@ GET http://api.xtick.top/doc/stockinfo?symbol=all&token=YOUR_TOKEN
 
 **请求参数**：type, code(单个股票), tradeDate, token
 
-#### 2.6 成交统计
+#### 2.5 成交统计
 
 **接口地址**：`/doc/order/amount`
 
@@ -462,7 +452,7 @@ GET http://api.xtick.top/doc/stockinfo?symbol=all&token=YOUR_TOKEN
 
 #### 4.3 资金流向-实时接口
 
-**接口地址**：`/doc/hot/money`
+**接口地址**：`/doc/hot/timemoney`
 
 **功能描述**：获取资金流数据，盘中实时更新。
 
@@ -573,12 +563,12 @@ GET http://api.xtick.top/doc/stockinfo?symbol=all&token=YOUR_TOKEN
 
 ## 🚀 Python SDK使用指南
 
-本项目提供了完整的Python API调用示例，位于 `xtick/code/api/` 目录。
+本项目提供了完整的Python API调用示例，位于 `xtick/scripts/api/` 目录。
 
 ### 项目结构
 
 ```
-xtick/code/
+xtick/scripts/
 ├── api/
 │   ├── XTickBaseApi.py        # 基础数据接口（8个接口）
 │   ├── XTickMarketApi.py      # 行情数据接口（8个接口）
@@ -604,7 +594,7 @@ pip install -r requirements.txt
 
 #### 2. 配置Token
 
-编辑 `xtick/code/Config.py`：
+编辑 `xtick/scripts/Config.py`：
 
 ```python
 TOKEN = "your_token_here"  # 从 http://www.xtick.top/ 获取
@@ -614,8 +604,8 @@ SERVER_URL = "http://api.xtick.top"
 #### 3. 调用API示例
 
 ```python
-from xtick.code.api.XTickMarketApi import getKlineMarket
-from xtick.code.Config import Config
+from xtick.scripts.api.XTickMarketApi import getKlineMarket
+from xtick.scripts.Config import Config
 import json
 
 # 获取平安银行日K线数据
@@ -637,10 +627,10 @@ print(f"获取到 {len(data)} 条K线数据")
 
 ```bash
 # 运行所有接口测试
-python xtick/code/XTickStockApiClient.py
+python xtick/scripts/XTickStockApiClient.py
 
 # 或单独测试某个模块
-python -c "from xtick.code.XTickStockApiClient import XTickStockApiClient; \
+python -c "from xtick.scripts.XTickStockApiClient import XTickStockApiClient; \
            client = XTickStockApiClient(); \
            client.demoForMarketApi()"
 ```
@@ -650,7 +640,7 @@ python -c "from xtick.code.XTickStockApiClient import XTickStockApiClient; \
 `XTickStockApiClient.py` 提供了所有接口的完整测试用例：
 
 ```python
-from xtick.code.XTickStockApiClient import XTickStockApiClient
+from xtick.scripts.XTickStockApiClient import XTickStockApiClient
 
 client = XTickStockApiClient()
 
@@ -715,7 +705,7 @@ print(df.head())
 print(f"数据条数: {len(df)}")
 ```
 
-更多示例请参考 `xtick/code/XTickStockApiClient.py`
+更多示例请参考 `xtick/scripts/XTickStockApiClient.py`
 
 ---
 
